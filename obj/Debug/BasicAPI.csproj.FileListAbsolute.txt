@@ -1,0 +1,141 @@
+D:\Forms\Tracking\BasicAPI\bin\Debug\Traking_Forms.dll
+D:\Forms\Tracking\BasicAPI\bin\Debug\Traking_Forms.pdb
+D:\Forms\Tracking\BasicAPI\bin\Debug\EHFAPI.dll
+D:\Forms\Tracking\BasicAPI\obj\Debug\Traking_Forms.dll
+D:\Forms\Tracking\BasicAPI\obj\Debug\Traking_Forms.pdb
+D:\Forms\Tracking\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+D:\Forms\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.dll
+D:\Forms\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.pdb
+D:\Forms\InterRapidisimo\BasicAPI\bin\Debug\EHFAPI.dll
+D:\Forms\InterRapidisimo\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+D:\Forms\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.dll
+D:\Forms\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.pdb
+W:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.dll
+W:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.pdb
+W:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\EHFAPI.dll
+W:\2.InterRapidisimo\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.dll
+W:\2.InterRapidisimo\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\EHFAPI.dll
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Vintasoft.Barcode.dll
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.dll
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.xml
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\2.InterRapidisimo\InterRapidisimo\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\RDLC\Reporte1.rdlc
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\App.config
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\DevComponents.DotNetBar2.dll
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Repote.exe
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Vintasoft.Barcode.dll
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.dll
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Repote.pdb
+Z:\15. icetex\Codigo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.xml
+Z:\15. icetex\Codigo\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+Z:\15. icetex\Codigo\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\15. icetex\Codigo\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\2.InterRapidisimo\InterRapidisimo\New Code\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\2.InterRapidisimo\InterRapidisimo\New Code\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\2.InterRapidisimo\InterRapidisimo\New Code\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\2.InterRapidisimo\InterRapidisimo\New Code\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\bin\Debug\Vintasoft.Barcode.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\bin\Debug\Vintasoft.WpfBarcode.xml
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+C:\Forms\codigoe3\BasicAPI\BasicAPI\bin\Debug\Traking_Forms.dll
+C:\Forms\codigoe3\BasicAPI\BasicAPI\bin\Debug\Traking_Forms.pdb
+C:\Forms\codigoe3\BasicAPI\BasicAPI\bin\Debug\DevComponents.DotNetBar2.dll
+C:\Forms\codigoe3\BasicAPI\BasicAPI\bin\Debug\DevComponents.DotNetBar2.xml
+C:\Forms\codigoe3\BasicAPI\BasicAPI\obj\Debug\Traking_Forms.dll
+C:\Forms\codigoe3\BasicAPI\BasicAPI\obj\Debug\Traking_Forms.pdb
+C:\Forms\codigoe3\BasicAPI\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.Report.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.VisorFormulario.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.MensajeCorregir.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.Validacion.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\Traking_Forms.Properties.Resources.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\1\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\bin\Debug\EHFAPI.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.MensajeCorregir.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.Properties.Resources.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.Report.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.Validacion.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.VisorFormulario.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\2\BasicAPI\obj\Debug\Traking_Forms.Forms_Admin.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.Forms_Admin.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.MensajeCorregir.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.Properties.Resources.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.Report.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.Validacion.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.VisorFormulario.resources
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\bin\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\bin\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\BasicAPI\obj\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\bin\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\bin\Debug\Traking_Forms.pdb
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.Forms_Admin.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.MensajeCorregir.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.Properties.Resources.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.Report.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.Validacion.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.VisorFormulario.resources
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.dll
+Z:\33. Inscripcion de Ciudadanos\Codigo\Control de cambio\2\BasicAPI\obj\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\bin\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\bin\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.Forms_Admin.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.MensajeCorregir.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.Properties.Resources.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.Report.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.Validacion.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.VisorFormulario.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\v2012\BasicAPI\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\bin\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\bin\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Forms_Admin.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.MensajeCorregir.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Properties.Resources.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Report.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Validacion.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.VisorFormulario.resources
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.dll
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.pdb
+C:\Users\Administrador\Desktop\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
+C:\Codigo\v2012\Produccion\bin\Debug\Traking_Forms.dll
+C:\Codigo\v2012\Produccion\bin\Debug\Traking_Forms.pdb
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Forms_Admin.resources
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.MensajeCorregir.resources
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Properties.Resources.resources
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Report.resources
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.Validacion.resources
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.VisorFormulario.resources
+C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
+C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.CoreCompileInputs.cache
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.dll
+C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.pdb
+C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache
