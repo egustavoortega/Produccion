@@ -16,6 +16,7 @@ using System.Drawing.Drawing2D;
 using System.Text.RegularExpressions;
 using System.Net;
 using Recorte;
+using System.Globalization;
 
 namespace BasicAPI
 {
@@ -427,10 +428,10 @@ namespace BasicAPI
                             else
                             {
                                 ClassData.NumeroIntentosCaptura2++;
-                                //   MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                  //MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 if (campo != "TelFijo" && campo != "TelMovil")
                                 {
-                                    EHFApp.Field.SetValueStr("");
+                                    EHFApp.Field.SetValueStr(valor);
                                 }
 
                                 EHFApp.Field.SetStatus(ehFieldStatus.ehValidationError);
@@ -2600,6 +2601,9 @@ namespace BasicAPI
 													string Segapellido = dt2.Rows[0]["Apellido2"].ToString();
 													string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
 
+
+                                                    Fexpedicion = DateTime.Parse(Fexpedicion).ToString("dd/MM/yyyy");
+                                                  
 													string ano = Fexpedicion.Substring(6, 4);
 													string Mes = Fexpedicion.Substring(3, 2);
 													string Dia = Fexpedicion.Substring(0, 2);
@@ -2875,9 +2879,13 @@ namespace BasicAPI
 							}
 							else
 							{
-								ClassData.NumeroIntentosCaptura2 = 0;
-								ClassData.VlrAprobado = "";
-								EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+
+                                ClassData.NumeroIntentosCaptura2 = 0;
+                                ClassData.VlrAprobado = "";
+                                if (campo=="Email")
+                                {EHFApp.Field.SetValueStr(Buffer); }
+                                
+                                EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
 								EHFApp.SetReturnValue(0, "Y");
 								GC.Collect();
 								return (int)ehReturnValue.EV_OK;
@@ -5044,9 +5052,9 @@ namespace BasicAPI
                             GC.Collect();
                             return true;
                         }
-						if (long.TryParse(Buffer, out num5))
-						{
-							string imagen = EHFApp.Form.GetSourceImage();
+                        if (ValidarTelefono(Buffer))
+                        {
+                            string imagen = EHFApp.Form.GetSourceImage();
 							String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
 							Formulario = Formulario.Substring(0,Formulario.Length-11);
 							Dictionary<string, object> parametros = new Dictionary<string, object>();
@@ -5074,6 +5082,10 @@ namespace BasicAPI
 								}
 
 							}
+                        }
+						if (long.TryParse(Buffer, out num5))
+						{
+							
 						}
                         break;
                     case "TelMovil":
@@ -5082,9 +5094,9 @@ namespace BasicAPI
                             GC.Collect();
                             return true;
                         }
-						if (long.TryParse(Buffer, out num5))
-						{
-							string imagen = EHFApp.Form.GetSourceImage();
+                        if (ValidarTelefono(Buffer))
+                        {
+                            string imagen = EHFApp.Form.GetSourceImage();
 							String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
 							Formulario = Formulario.Substring(0, Formulario.Length - 11);
 							Dictionary<string, object> parametros = new Dictionary<string, object>();
@@ -5115,7 +5127,8 @@ namespace BasicAPI
 						}
                         break;
                     case "Email":
-                        if (Buffer == "")
+                        
+                            if (Buffer == "")
                         {
                             GC.Collect();
                             return true;
@@ -5229,6 +5242,41 @@ namespace BasicAPI
             }
         }
 
+        private bool ValidarTelefono(string buffer)
+        {
+            try
+            {
+                bool Resultado = false;
+                              
+                string[] partNumbers = { buffer };
+                Regex rgx = new Regex(@"^[1-9]$");
+                foreach (string partNumber in partNumbers)
+                {
+                    string str = partNumber;
+                    char[] arr;
+
+                    arr = str.ToCharArray(0, partNumber.Length);
+                    foreach (char d in arr)
+                    {
+                        
+                        if (char.IsNumber(d))
+                        {
+                            Resultado = true;
+                        }
+                        else
+                        {
+                            Resultado = false;
+                            break;
+                        }
+                    }
+                }
+
+                return Resultado;
+            }
+            catch (Exception ex)
+            { return false; }
+        }
+
         private bool ValidarCaracteresEspeciales(string Buffer)
         {
             try
@@ -5256,6 +5304,8 @@ namespace BasicAPI
                         }
                     }
                 }
+
+
                 GC.Collect();
                 return Resultado;
             }
@@ -5373,7 +5423,7 @@ namespace BasicAPI
 
 						EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
 						EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehValidationError);
-						EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
+						//EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
 						EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
 						EHFApp.Form.GetFormField("Difhuella", 0).SetStatus(ehFieldStatus.ehValidationError);
 					}
@@ -6053,7 +6103,7 @@ namespace BasicAPI
                     #region Email
                     
                         EHFApp.Form.GetFormField("Email", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
+                        EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
                     
                     #endregion
 
@@ -6061,6 +6111,20 @@ namespace BasicAPI
 
                     EHFApp.Form.GetFormField("enmenda", 0).SetValueStr("");
                     EHFApp.Form.GetFormField("enmenda", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                    #endregion
+
+                    #region Difhuella
+
+                    EHFApp.Form.GetFormField("Difhuella", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Difhuella", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                    #endregion
+
+                    #region Huella
+
+                    EHFApp.Form.GetFormField("Huellas", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Huellas", 0).SetStatus(ehFieldStatus.ehValidationError);
 
                     #endregion
                 }
@@ -8254,7 +8318,7 @@ namespace BasicAPI
 
         public void  Log(string log)
         {
-            StreamWriter escribir = File.CreateText(@"" + "Z:\\Log\\log_" + DateTime.Now.ToString("yyyyMMddh") + ".txt");
+            StreamWriter escribir = File.CreateText(@"" + "Z:\\Compartido\\Log\\log_" + DateTime.Now.ToString("yyyyMMddh") + ".txt");
      
             escribir.WriteLine(log);
             escribir.Close();
