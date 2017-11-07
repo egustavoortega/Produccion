@@ -138,3 +138,4 @@ C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.GenerateResource.Cache
 C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csproj.CoreCompileInputs.cache
 C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.dll
 C:\Codigo\v2012\Produccion\obj\Debug\Traking_Forms.pdb
+C:\Codigo\v2012\Produccion\obj\Debug\BasicAPI.csprojResolveAssemblyReference.cache

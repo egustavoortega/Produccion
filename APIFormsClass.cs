@@ -28,8 +28,8 @@ namespace BasicAPI
 
     public class APIFormsClass
     {
-         
-        
+
+
         #region Declaracion Forms
 
         [DllImport("user32.dll")]
@@ -58,7 +58,7 @@ namespace BasicAPI
         Dictionary<string, object> parametros;
         string ipEhGlobal;
         int ids_documents;
-        string sUrlRequest="";
+        string sUrlRequest = "";
         bool Captura22 = false;
         bool EstadoNom1 = false;
         bool EstadoNom2 = false;
@@ -68,11 +68,11 @@ namespace BasicAPI
         bool EstadoBloqueo = false;
         SqlConnection conexion;
 
-        
-   
 
 
-        
+
+
+
 
 
         #endregion
@@ -83,9 +83,9 @@ namespace BasicAPI
         {
             _Ehlocal = sIniFile;
             EHFApp = App.CreateApp(objEHFApp);
-            
+
             MessageBox.Show("Traking FORMS V - E3 -  Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Connect", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            
+
             conexion = GetConexion();
             conexion.Open();
             CargasIniciales();
@@ -124,10 +124,10 @@ namespace BasicAPI
 
                 EHFApp.Subscribe(this, "FieldComplete", "OnFieldComplete");
                 EHFApp.Subscribe(this, "FieldRetyped", "OnFieldRetyped");
-                
+
 
                 EHFApp.Subscribe(this, "FieldVerify", "OnFieldVerify");
-                
+
                 EHFApp.Subscribe(this, "ForceFieldComplete", "OnForceFieldComplete");
                 EHFApp.Subscribe(this, "FieldValidateNonExisting", "OnFieldValidateNonExisting");
                 EHFApp.Subscribe(this, "FieldValidateExisting", "OnFieldValidateExisting");
@@ -136,7 +136,7 @@ namespace BasicAPI
                 EHFApp.Subscribe(this, "CompFieldStartExtVerify", "onCompFieldStartExtVerify");
 
                 EHFApp.Subscribe(this, "AppStarted", "OnAppStarted");
-               // this.DeshabilitarMenues();
+                // this.DeshabilitarMenues();
                 GC.Collect();
                 return (int)ehReturnValue.EV_OK;
 
@@ -157,12 +157,12 @@ namespace BasicAPI
             return (int)ehReturnValue.EV_OK;
         }
 
-     
+
         public int OnFieldValidateExisting()
         {
             try
             {
-               GC.Collect();
+                GC.Collect();
                 return (int)ehReturnValue.EV_OK;
 
             }
@@ -200,9 +200,9 @@ namespace BasicAPI
                     GC.Collect();
                     return (int)ehReturnValue.EV_OK_ABORT;
                 }
-                
+
             }
-               
+
             GC.Collect();
             return (int)ehReturnValue.EV_OK;
         }
@@ -212,7 +212,7 @@ namespace BasicAPI
         {
             try
             {
-                
+
                 //string nom = EHFApp.Field.GetName();
 
                 //if (EHFApp is VerifyApp)
@@ -221,7 +221,7 @@ namespace BasicAPI
                 //    {
                 //        if (EHFApp.Field.GetStatus() != ehFieldStatus.ehComplete)
                 //        {
-                             
+
 
                 //          //  EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
                 //        }
@@ -248,7 +248,7 @@ namespace BasicAPI
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@Name", "URL");
                 parametros.Add("@opcion", "1");
-                DataTable dt = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros);
+                DataTable dt = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros);
 
                 sUrlRequest = dt.Rows[0][0].ToString();
                 GC.Collect();
@@ -428,7 +428,7 @@ namespace BasicAPI
                             else
                             {
                                 ClassData.NumeroIntentosCaptura2++;
-                                  //MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 if (campo != "TelFijo" && campo != "TelMovil")
                                 {
                                     EHFApp.Field.SetValueStr(valor);
@@ -595,13 +595,13 @@ namespace BasicAPI
                     }
                     else
                     {
-                        if (campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2"  || campo == "fexpedia"
+                        if (campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2" || campo == "fexpedia"
                             || campo == "fexpemes" || campo == "fexpeano" || campo == "finsdia" || campo == "finsmes" || campo == "finsano")
                         {
                             Resultado = ValidacaionDeCampos(campo, valor);
                             if (Resultado)
                             {
-                          
+
                                 #region Campos Reuqeridos
 
                                 string campoNuevo = campo;
@@ -654,7 +654,7 @@ namespace BasicAPI
                                     parametros.Add("campoForms", campo);
                                     parametros.Add("campo", campoNuevo);
                                     parametros.Add("opcion", opcion);
-                                    DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Cap_Anteriores2]", parametros);
+                                    DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Cap_Anteriores2]", parametros);
                                     if (!validarSegundaCaptura(dt, valor))
                                     {
                                         int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
@@ -1308,7 +1308,7 @@ namespace BasicAPI
                                     parametros.Add("campoForms", campo);
                                     parametros.Add("campo", campoNuevo);
                                     parametros.Add("opcion", opcion);
-                                    DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Cap_Anteriores2]", parametros);
+                                    DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Cap_Anteriores2]", parametros);
                                     if (!validarSegundaCaptura(dt, valor))
                                     {
                                         int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
@@ -1573,7 +1573,7 @@ namespace BasicAPI
                 Reporte.ShowDialog();
                 GC.Collect();
                 return (int)ehReturnValue.EV_OK;
-                
+
             }
             catch (Exception err)
             {
@@ -1593,7 +1593,7 @@ namespace BasicAPI
                 if (ClassData.Validacion)
                 {
                     Dictionary<string, object> parametros = new Dictionary<string, object>();
-                    DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_LimpiarDatos]", parametros);
+                    DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_LimpiarDatos]", parametros);
                     MessageBox.Show("Accion realizada exitosamente.");
                 }
 
@@ -1641,11 +1641,11 @@ namespace BasicAPI
                 string imagen = EHFApp.Form.GetSourceImage();
 
                 FileInfo arch = new FileInfo(imagen);
-                string nombre = arch.Name.ToUpper().Replace(".TIF","").Split('-')[0];
+                string nombre = arch.Name.ToUpper().Replace(".TIF", "").Split('-')[0];
 
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@NombreArchivo", nombre);
-                DataTable dt = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Huellas_Path]", parametros);
+                DataTable dt = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Huellas_Path]", parametros);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -1660,13 +1660,13 @@ namespace BasicAPI
 
                         Dictionary<string, object> parametros2 = new Dictionary<string, object>();
                         parametros2.Add("@formulario", nombre);
-                        DataTable dt2 = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Huellas_Path2]", parametros2);
+                        DataTable dt2 = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Huellas_Path2]", parametros2);
 
                     }
 
                     Dictionary<string, object> parametros3 = new Dictionary<string, object>();
                     parametros3.Add("@NombreArchivo", nombre);
-                    DataTable dt3 = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Huellas_Path]", parametros3);
+                    DataTable dt3 = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Huellas_Path]", parametros3);
 
                     if (dt3.Rows.Count > 0)
                     {
@@ -1674,7 +1674,7 @@ namespace BasicAPI
                     }
                 }
 
-               
+
 
                 VisorFormulario Reporte = new VisorFormulario(imagen);
                 // Form1 Reporte = new Form1(ClassData.conexion);
@@ -1702,7 +1702,7 @@ namespace BasicAPI
                     ((ManagerApp)EHFApp).MngrAddMenuItem(1, true, "Reporte", "CONTROL+T", true);
                     ((ManagerApp)EHFApp).MngrAddMenuItem(2, true, "Limpiar Datos", "CONTROL+L", true);
                     ((ManagerApp)EHFApp).MngrAddMenuItem(3, true, "Priorizar", "CONTROL+P", true);
-                   
+
 
                 }
                 if (EHFApp is VerifyApp)
@@ -1875,1304 +1875,1328 @@ namespace BasicAPI
 
 
                 string ValorCapturado = Buffer;
+
                 string campo = EHFApp.Field.GetName().ToString();
                 string valor = EHFApp.Field.GetValueStr().ToString();
 
-				bool Resultado = false;
+                bool Resultado = false;
                 if (EHFApp is VerifyApp)
                 {
-					if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
-					{
+                    if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
+                    {
 
-						#region No REQUERIDOS
-
-
-						if (campo == "cedula")
-						{
-							#region cedula
-							Resultado = ValidacaionDeCampos(campo, Buffer);
-							if (Resultado)
-							{
-
-								if (Buffer == "")
-								{
-									EHFApp.Field.SetValueStr(Buffer);
-									MessageBox.Show("El Campo no permite valores en blanco", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-									GC.Collect();
-									return (int)ehReturnValue.EV_OK_ABORT;
-								}
-								else
-								{
+                        #region No REQUERIDOS
 
 
-									#region Cedula con datos
+                        if (campo == "cedula")
+                        {
+                            #region cedula
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+                            if (Resultado)
+                            {
 
-									if (Buffer.Length < 3)
-									{
-										Resultado = false;
-										// EHFApp.Field.SetValueStr(Buffer);
-										GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-									}
-									else if (Buffer.Length == 3)
-									{
-										//if (Buffer == "000")
-										//{
+                                if (Buffer == "")
+                                {
+                                    EHFApp.Field.SetValueStr(Buffer);
+                                    MessageBox.Show("El Campo no permite valores en blanco", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    GC.Collect();
+                                    return (int)ehReturnValue.EV_OK_ABORT;
+                                }
+                                else
+                                {
 
-										if (ValorCapturado != valor)
-										{
-											if (Buffer != "")
-											{
-												EHFApp.Field.SetValueStr(Buffer);
-												// MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-												GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-											}
-										}
-										else
-										{
-											Dictionary<string, object> parametros = new Dictionary<string, object>();
-											parametros.Add("@Cedula", Buffer);
-											parametros.Add("@Nombre", EHFApp.Form.GetEHKey());
-											parametros.Add("@opcion", "1");
-											DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Validacion_Verify]", parametros);
 
-											string resultado = dt.Rows[0][0].ToString();
+                                    #region Cedula con datos
 
-											if (resultado == "1")
-											{
-												EstadoBloqueo = dt.Rows[0]["Bloqueado"].ToString().ToUpper() == "0" ? false : true;
-												EstadoNom1 = dt.Rows[0]["EstadoNom1"].ToString().ToUpper() == "0" ? false : true;
-												EstadoNom2 = dt.Rows[0]["EstadoNom2"].ToString().ToUpper() == "0" ? false : true;
-												EstadoApe1 = dt.Rows[0]["EstadoApe1"].ToString().ToUpper() == "0" ? false : true;
-												EstadoApe2 = dt.Rows[0]["EstadoApe2"].ToString().ToUpper() == "0" ? false : true;
-												EstadoFecha = dt.Rows[0]["EstadoFecha"].ToString().ToUpper() == "0" ? false : true;
-												string Cedula = dt.Rows[0]["Cedula"].ToString();
-												string Prinombre = dt.Rows[0]["Nombre1"].ToString();
-												string Segnombre = dt.Rows[0]["Nombre2"].ToString();
-												string Priapellido = dt.Rows[0]["Apellido1"].ToString();
-												string Segapellido = dt.Rows[0]["Apellido2"].ToString();
-												string Fexpedicion = dt.Rows[0]["Fexpedicion"].ToString();
+                                    if (Buffer.Length < 3)
+                                    {
+                                        Resultado = false;
+                                        // EHFApp.Field.SetValueStr(Buffer);
+                                        GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                    }
+                                    else if (Buffer.Length == 3)
+                                    {
+                                        //if (Buffer == "000")
+                                        //{
 
-												string Genero = dt.Rows[0]["Genero"].ToString().ToUpper() == "M" ? "1" : "2";
-												string Nvlestudio = dt.Rows[0]["Nvlestudio"].ToString();
-												string Invidente = dt.Rows[0]["Invidente"].ToString();
-												string Braille = dt.Rows[0]["Braille"].ToString();
-												string Email = dt.Rows[0]["Email"].ToString();
-												string TelMovil = dt.Rows[0]["TelMovil"].ToString();
-												string TelFijo = dt.Rows[0]["TelFijo"].ToString();
-												string Dir = dt.Rows[0]["Dir"].ToString();
-												string Capacidad = dt.Rows[0]["Capacidad"].ToString().ToUpper() == "S" ? "1" : "2";
-												string FechaInscripcion = dt.Rows[0]["FechaInscripcion"].ToString();
+                                        if (ValorCapturado != valor)
+                                        {
+                                            if (Buffer != "")
+                                            {
+                                                EHFApp.Field.SetValueStr(Buffer);
+                                                // MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                                            parametros.Add("@Cedula", Buffer);
+                                            parametros.Add("@Nombre", EHFApp.Form.GetEHKey());
+                                            parametros.Add("@opcion", "1");
+                                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Validacion_Verify]", parametros);
 
-												string DiaF = FechaInscripcion.Substring(0, 2);
-												string MesF = FechaInscripcion.Substring(3, 2);
-												string anoF = FechaInscripcion.Substring(9, 1);
+                                            string resultado = dt.Rows[0][0].ToString();
 
-												string Dia = Fexpedicion.Substring(0, 2);
-												string Mes = Fexpedicion.Substring(3, 2);
-												string ano = Fexpedicion.Substring(6, 4);
+                                            if (resultado == "1")
+                                            {
+                                                EstadoBloqueo = dt.Rows[0]["Bloqueado"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoNom1 = dt.Rows[0]["EstadoNom1"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoNom2 = dt.Rows[0]["EstadoNom2"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoApe1 = dt.Rows[0]["EstadoApe1"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoApe2 = dt.Rows[0]["EstadoApe2"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoFecha = dt.Rows[0]["EstadoFecha"].ToString().ToUpper() == "0" ? false : true;
+                                                string Cedula = dt.Rows[0]["Cedula"].ToString();
+                                                string Prinombre = dt.Rows[0]["Nombre1"].ToString();
+                                                string Segnombre = dt.Rows[0]["Nombre2"].ToString();
+                                                string Priapellido = dt.Rows[0]["Apellido1"].ToString();
+                                                string Segapellido = dt.Rows[0]["Apellido2"].ToString();
+                                                string Fexpedicion = dt.Rows[0]["Fexpedicion"].ToString();
 
-												#region Primer nombre
-												EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
-												if (EstadoNom1)
-												{
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Segundo nombre
-												EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
-												if (EstadoNom2)
-												{
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
+                                                string Genero = dt.Rows[0]["Genero"].ToString().ToUpper() == "M" ? "1" : "2";
+                                                string Nvlestudio = dt.Rows[0]["Nvlestudio"].ToString();
+                                                string Invidente = dt.Rows[0]["Invidente"].ToString();
+                                                string Braille = dt.Rows[0]["Braille"].ToString();
+                                                string Email = dt.Rows[0]["Email"].ToString();
+                                                string TelMovil = dt.Rows[0]["TelMovil"].ToString();
+                                                string TelFijo = dt.Rows[0]["TelFijo"].ToString();
+                                                string Dir = dt.Rows[0]["Dir"].ToString();
+                                                string Capacidad = dt.Rows[0]["Capacidad"].ToString().ToUpper() == "S" ? "1" : "2";
+                                                string FechaInscripcion = dt.Rows[0]["FechaInscripcion"].ToString();
 
-												#endregion
-												#region primer nombre
-												EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
-												if (EstadoApe1)
-												{
+                                                string DiaF = FechaInscripcion.Substring(0, 2);
+                                                string MesF = FechaInscripcion.Substring(3, 2);
+                                                string anoF = FechaInscripcion.Substring(9, 1);
 
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region segundo apellido
-												EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
-												if (EstadoApe2)
-												{
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region año
-												EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
-												}
-												#endregion
-												#region mes
-												EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Dia
-												EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region año
-												EHFApp.Form.GetFormField("finsano", 0).SetValueStr(anoF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehRetype);
-												}
-												#endregion
-												#region mes
-												EHFApp.Form.GetFormField("finsmes", 0).SetValueStr(MesF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Dia
-												EHFApp.Form.GetFormField("finsdia", 0).SetValueStr(DiaF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Nvlestudio
+                                                string Dia = Fexpedicion.Substring(0, 2);
+                                                string Mes = Fexpedicion.Substring(3, 2);
+                                                string ano = Fexpedicion.Substring(6, 4);
 
-												EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr(Nvlestudio);
-												EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehRetype);
-												EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
+                                                #region Primer nombre
+                                                EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
+                                                if (EstadoNom1)
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Segundo nombre
+                                                EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
+                                                if (EstadoNom2)
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
 
-												#endregion
-												#region Genero
-												try
-												{
-													EHFApp.Form.GetFormField("Genero", 1).SetValueStr(Genero);
-													EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehRetype);
-													EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                #endregion
+                                                #region primer nombre
+                                                EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
+                                                if (EstadoApe1)
+                                                {
 
-												}
-												catch
-												{
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region segundo apellido
+                                                EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
+                                                if (EstadoApe2)
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region año
+                                                EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                }
+                                                #endregion
+                                                #region mes
+                                                EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Dia
+                                                EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region año
+                                                EHFApp.Form.GetFormField("finsano", 0).SetValueStr(anoF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                }
+                                                #endregion
+                                                #region mes
+                                                EHFApp.Form.GetFormField("finsmes", 0).SetValueStr(MesF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Dia
+                                                EHFApp.Form.GetFormField("finsdia", 0).SetValueStr(DiaF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Nvlestudio
+
+                                                EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr(Nvlestudio);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
+
+                                                #endregion
+                                                #region Genero
+                                                try
+                                                {
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetValueStr(Genero);
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+
+                                                }
+                                                catch
+                                                {
                                                     EHFApp.Form.GetFormField("genero", 1).SetValueStr(Genero);
-													EHFApp.Form.GetFormField("genero", 1).SetStatus(ehFieldStatus.ehRetype);
-													EHFApp.Form.GetFormField("genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("genero", 2).SetStatus(ehFieldStatus.ehComplete);
-												}
-												#endregion
-												#region Capacidad
+                                                    EHFApp.Form.GetFormField("genero", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                    EHFApp.Form.GetFormField("genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                #endregion
+                                                #region Capacidad
 
-												EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr(Capacidad);
-												EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
-												EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
-												EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr(Capacidad);
+                                                EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
 
-												#endregion
-												#region Invidente
+                                                #endregion
+                                                #region Invidente
 
-												EHFApp.Form.GetFormField("Invidente", 0).SetValueStr(Invidente);
-												EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region Braille
-
-												EHFApp.Form.GetFormField("Braile", 0).SetValueStr(Braille);
-												EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Invidente", 0).SetValueStr(Invidente);
+                                                EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
-												#region Email
+                                                #endregion
+                                                #region Braille
 
-												EHFApp.Form.GetFormField("Email", 0).SetValueStr(Email);
-												EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region TelMovil
-
-												EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr(TelMovil);
-												EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Braile", 0).SetValueStr(Braille);
+                                                EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
-												#region TelFijo
+                                                #endregion
+                                                #region Email
 
-												EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr(TelFijo);
-												EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region Dir
-
-												EHFApp.Form.GetFormField("Dir", 0).SetValueStr(Dir);
-												EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Email", 0).SetValueStr(Email);
+                                                EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
+                                                #endregion
+                                                #region TelMovil
 
-												//Esta en INterpretacion
-												EHFApp.Field.SetValueStr(Buffer);
-												EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.SetReturnValue(0, "Y");
-												Captura22 = true;
-												GC.Collect();
-												return (int)ehReturnValue.EV_OK;
-
-											}
-											else
-											{
-												//Esta en ANI
-												Dictionary<string, object> parametros2 = new Dictionary<string, object>();
-												parametros2.Add("@Cedula", Buffer);
-												parametros2.Add("@Nombre", EHFApp.Form.GetEHKey());
-												parametros2.Add("@opcion", "2");
-												DataTable dt2 = ExecuteSPCon(conexion,"[dbo].[Traking_Validacion_Verify]", parametros2);
-
-												resultado = dt2.Rows[0][0].ToString();
-												if (resultado == "1")
-												{
-													Captura22 = true;
-													string Cedula = dt2.Rows[0]["cedula"].ToString();
-													string Prinombre = dt2.Rows[0]["Nombre1"].ToString();
-													string Segnombre = dt2.Rows[0]["Nombre2"].ToString();
-													string Priapellido = dt2.Rows[0]["Apellido1"].ToString();
-													string Segapellido = dt2.Rows[0]["Apellido2"].ToString();
-													string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
-
-													string ano = Fexpedicion.Substring(6, 4);
-													string Mes = Fexpedicion.Substring(3, 2);
-													string Dia = Fexpedicion.Substring(0, 2);
+                                                EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr(TelMovil);
+                                                EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-													#region Primer nombre
-													if (Prinombre != "%")
-													{
-														EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
-														EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region Segundo nombre
-													if (Segnombre != "%")
-													{
-														EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
-														EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region primer nombre
-													if (Priapellido != "%")
-													{
-														EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
-														EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region segundo apellido
-													if (Segapellido != "%")
-													{
-														EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
-														EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region año
-													if (ano != "%")
-													{
-														EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
-														EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region mes
-													if (Mes != "%")
-													{
-														EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
-														EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region Dia
-													if (Dia != "%")
-													{
-														EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
-														EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-												}
-												else
-												{
+                                                #endregion
+                                                #region TelFijo
 
-													EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr(TelFijo);
+                                                EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-													EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                #endregion
+                                                #region Dir
 
-													EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													#region Nvlestudio
-
-													EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
-													EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
-													EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
-
-													EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                EHFApp.Form.GetFormField("Dir", 0).SetValueStr(Dir);
+                                                EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-													EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                #endregion
 
-													EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                //Esta en INterpretacion
+                                                EHFApp.Field.SetValueStr(Buffer);
+                                                EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.SetReturnValue(0, "Y");
+                                                Captura22 = true;
+                                                GC.Collect();
+                                                return (int)ehReturnValue.EV_OK;
+
+                                            }
+                                            else
+                                            {
+                                                //Esta en ANI
+                                                Dictionary<string, object> parametros2 = new Dictionary<string, object>();
+                                                parametros2.Add("@Cedula", Buffer);
+                                                parametros2.Add("@Nombre", EHFApp.Form.GetEHKey());
+                                                parametros2.Add("@opcion", "2");
+                                                DataTable dt2 = ExecuteSPCon(conexion, "[dbo].[Traking_Validacion_Verify]", parametros2);
+
+                                                resultado = dt2.Rows[0][0].ToString();
+                                                if (resultado == "1")
+                                                {
+                                                    Captura22 = true;
+                                                    string Cedula = dt2.Rows[0]["cedula"].ToString();
+                                                    string Prinombre = dt2.Rows[0]["Nombre1"].ToString();
+                                                    string Segnombre = dt2.Rows[0]["Nombre2"].ToString();
+                                                    string Priapellido = dt2.Rows[0]["Apellido1"].ToString();
+                                                    string Segapellido = dt2.Rows[0]["Apellido2"].ToString();
+                                                    string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
+
+                                                    string ano = Fexpedicion.Substring(6, 4);
+                                                    string Mes = Fexpedicion.Substring(3, 2);
+                                                    string Dia = Fexpedicion.Substring(0, 2);
 
 
-													EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    #region Primer nombre
+                                                    if (Prinombre != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
+                                                        EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region Segundo nombre
+                                                    if (Segnombre != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
+                                                        EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region primer nombre
+                                                    if (Priapellido != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
+                                                        EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region segundo apellido
+                                                    if (Segapellido != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
+                                                        EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region año
+                                                    if (ano != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
+                                                        EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region mes
+                                                    if (Mes != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
+                                                        EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region Dia
+                                                    if (Dia != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
+                                                        EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                }
+                                                else
+                                                {
 
-													#endregion
-
-												}
-											}
-										}
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
 
 
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-										//}
-										//else
-										//{
-										//    Resultado = false;
-										//    Resultado = false;
-										//    // EHFApp.Field.SetValueStr(Buffer);
-										//    GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-										//}
-									}
-									else
-									{
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-										if (Buffer == "")
-										{
-											EHFApp.Field.SetValueStr(Buffer);
-											GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-										}
-										else if (ValorCapturado != valor)
-										{
-											if (Buffer != "")
-											{
-												EHFApp.Field.SetValueStr(Buffer);
-												// MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-												GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-											}
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-										}
-										else
-										{
-											Dictionary<string, object> parametros = new Dictionary<string, object>();
-											parametros.Add("@Cedula", Buffer);
-											parametros.Add("@Nombre", EHFApp.Form.GetEHKey());
-											parametros.Add("@opcion", "1");
-											DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Validacion_Verify]", parametros);
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-											string resultado = dt.Rows[0][0].ToString();
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-											if (resultado == "1")
-											{
-												EstadoBloqueo = dt.Rows[0]["Bloqueado"].ToString().ToUpper() == "0" ? false : true;
-												EstadoNom1 = dt.Rows[0]["EstadoNom1"].ToString().ToUpper() == "0" ? false : true;
-												EstadoNom2 = dt.Rows[0]["EstadoNom2"].ToString().ToUpper() == "0" ? false : true;
-												EstadoApe1 = dt.Rows[0]["EstadoApe1"].ToString().ToUpper() == "0" ? false : true;
-												EstadoApe2 = dt.Rows[0]["EstadoApe2"].ToString().ToUpper() == "0" ? false : true;
-												EstadoFecha = dt.Rows[0]["EstadoFecha"].ToString().ToUpper() == "0" ? false : true;
-												string Cedula = dt.Rows[0]["Cedula"].ToString();
-												string Prinombre = dt.Rows[0]["Nombre1"].ToString();
-												string Segnombre = dt.Rows[0]["Nombre2"].ToString();
-												string Priapellido = dt.Rows[0]["Apellido1"].ToString();
-												string Segapellido = dt.Rows[0]["Apellido2"].ToString();
-												string Fexpedicion = dt.Rows[0]["Fexpedicion"].ToString();
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-												string Genero = dt.Rows[0]["Genero"].ToString().ToUpper() == "M" ? "1" : "2";
-												string Nvlestudio = dt.Rows[0]["Nvlestudio"].ToString();
-												string Invidente = dt.Rows[0]["Invidente"].ToString();
-												string Braille = dt.Rows[0]["Braille"].ToString();
-												string Email = dt.Rows[0]["Email"].ToString();
-												string TelMovil = dt.Rows[0]["TelMovil"].ToString();
-												string TelFijo = dt.Rows[0]["TelFijo"].ToString();
-												string Dir = dt.Rows[0]["Dir"].ToString();
-												string Capacidad = dt.Rows[0]["Capacidad"].ToString().ToUpper() == "S" ? "1" : "2";
-												string FechaInscripcion = dt.Rows[0]["FechaInscripcion"].ToString();
+                                                    #region Nvlestudio
 
-												string DiaF = FechaInscripcion.Substring(0, 2);
-												string MesF = FechaInscripcion.Substring(3, 2);
-												string anoF = FechaInscripcion.Substring(9, 1);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
 
-												string Dia = Fexpedicion.Substring(0, 2);
-												string Mes = Fexpedicion.Substring(3, 2);
-												string ano = Fexpedicion.Substring(6, 4);
+                                                    EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-												#region Primer nombre
-												EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
-												if (EstadoNom1)
-												{
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Segundo nombre
-												EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
-												if (EstadoNom2)
-												{
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
 
-												#endregion
-												#region primer nombre
-												EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
-												if (EstadoApe1)
-												{
+                                                    EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region segundo apellido
-												EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
-												if (EstadoApe2)
-												{
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region año
-												EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
-												}
-												#endregion
-												#region mes
-												EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Dia
-												EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region año
-												EHFApp.Form.GetFormField("finsano", 0).SetValueStr(anoF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehRetype);
-												}
-												#endregion
-												#region mes
-												EHFApp.Form.GetFormField("finsmes", 0).SetValueStr(MesF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Dia
-												EHFApp.Form.GetFormField("finsdia", 0).SetValueStr(DiaF);
-												if (EstadoFecha)
-												{
-													EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												else
-												{
-													EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
-												}
-												#endregion
-												#region Nvlestudio
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
 
-												EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr(Nvlestudio);
-												EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehRetype);
-												EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
-												EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
 
-												#endregion
-												#region Genero
-												try
-												{
-													EHFApp.Form.GetFormField("Genero", 1).SetValueStr(Genero);
-													EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehRetype);
-													EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
 
-												}
-												catch
-												{
+                                                    #endregion
+
+                                                }
+                                            }
+                                        }
+
+
+
+                                        //}
+                                        //else
+                                        //{
+                                        //    Resultado = false;
+                                        //    Resultado = false;
+                                        //    // EHFApp.Field.SetValueStr(Buffer);
+                                        //    GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                        //}
+                                    }
+                                    else
+                                    {
+
+                                        if (Buffer == "")
+                                        {
+                                            EHFApp.Field.SetValueStr(Buffer);
+                                            GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                        }
+                                        else if (ValorCapturado != valor)
+                                        {
+                                            if (Buffer != "")
+                                            {
+                                                EHFApp.Field.SetValueStr(Buffer);
+                                                // MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                                            parametros.Add("@Cedula", Buffer);
+                                            parametros.Add("@Nombre", EHFApp.Form.GetEHKey());
+                                            parametros.Add("@opcion", "1");
+                                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Validacion_Verify]", parametros);
+
+                                            string resultado = dt.Rows[0][0].ToString();
+
+                                            if (resultado == "1")
+                                            {
+                                                EstadoBloqueo = dt.Rows[0]["Bloqueado"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoNom1 = dt.Rows[0]["EstadoNom1"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoNom2 = dt.Rows[0]["EstadoNom2"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoApe1 = dt.Rows[0]["EstadoApe1"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoApe2 = dt.Rows[0]["EstadoApe2"].ToString().ToUpper() == "0" ? false : true;
+                                                EstadoFecha = dt.Rows[0]["EstadoFecha"].ToString().ToUpper() == "0" ? false : true;
+                                                string Cedula = dt.Rows[0]["Cedula"].ToString();
+                                                string Prinombre = dt.Rows[0]["Nombre1"].ToString();
+                                                string Segnombre = dt.Rows[0]["Nombre2"].ToString();
+                                                string Priapellido = dt.Rows[0]["Apellido1"].ToString();
+                                                string Segapellido = dt.Rows[0]["Apellido2"].ToString();
+                                                string Fexpedicion = dt.Rows[0]["Fexpedicion"].ToString();
+
+                                                string Genero = dt.Rows[0]["Genero"].ToString().ToUpper() == "M" ? "1" : "2";
+                                                string Nvlestudio = dt.Rows[0]["Nvlestudio"].ToString();
+                                                string Invidente = dt.Rows[0]["Invidente"].ToString();
+                                                string Braille = dt.Rows[0]["Braille"].ToString();
+                                                string Email = dt.Rows[0]["Email"].ToString();
+                                                string TelMovil = dt.Rows[0]["TelMovil"].ToString();
+                                                string TelFijo = dt.Rows[0]["TelFijo"].ToString();
+                                                string Dir = dt.Rows[0]["Dir"].ToString();
+                                                string Capacidad = dt.Rows[0]["Capacidad"].ToString().ToUpper() == "S" ? "1" : "2";
+                                                string FechaInscripcion = dt.Rows[0]["FechaInscripcion"].ToString();
+
+                                                string DiaF = FechaInscripcion.Substring(0, 2);
+                                                string MesF = FechaInscripcion.Substring(3, 2);
+                                                string anoF = FechaInscripcion.Substring(9, 1);
+
+                                                string Dia = Fexpedicion.Substring(0, 2);
+                                                string Mes = Fexpedicion.Substring(3, 2);
+                                                string ano = Fexpedicion.Substring(6, 4);
+
+                                                #region Primer nombre
+                                                EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
+                                                if (EstadoNom1)
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Segundo nombre
+                                                EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
+                                                if (EstadoNom2)
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+
+                                                #endregion
+                                                #region primer nombre
+                                                EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
+                                                if (EstadoApe1)
+                                                {
+
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region segundo apellido
+                                                EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
+                                                if (EstadoApe2)
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region año
+                                                EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                }
+                                                #endregion
+                                                #region mes
+                                                EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Dia
+                                                EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region año
+                                                EHFApp.Form.GetFormField("finsano", 0).SetValueStr(anoF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                }
+                                                #endregion
+                                                #region mes
+                                                EHFApp.Form.GetFormField("finsmes", 0).SetValueStr(MesF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Dia
+                                                EHFApp.Form.GetFormField("finsdia", 0).SetValueStr(DiaF);
+                                                if (EstadoFecha)
+                                                {
+                                                    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                else
+                                                {
+                                                    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                }
+                                                #endregion
+                                                #region Nvlestudio
+
+                                                EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr(Nvlestudio);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
+
+                                                #endregion
+                                                #region Genero
+                                                try
+                                                {
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetValueStr(Genero);
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+
+                                                }
+                                                catch
+                                                {
                                                     EHFApp.Form.GetFormField("genero", 1).SetValueStr(Genero);
-													EHFApp.Form.GetFormField("genero", 1).SetStatus(ehFieldStatus.ehRetype);
-													EHFApp.Form.GetFormField("genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("genero", 2).SetStatus(ehFieldStatus.ehComplete);
-												}
-												#endregion
-												#region Capacidad
+                                                    EHFApp.Form.GetFormField("genero", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                    EHFApp.Form.GetFormField("genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                }
+                                                #endregion
+                                                #region Capacidad
 
-												EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr(Capacidad);
-												EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
-												EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
-												EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr(Capacidad);
+                                                EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                                                EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
 
-												#endregion
-												#region Invidente
+                                                #endregion
+                                                #region Invidente
 
-												EHFApp.Form.GetFormField("Invidente", 0).SetValueStr(Invidente);
-												EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region Braille
-
-												EHFApp.Form.GetFormField("Braile", 0).SetValueStr(Braille);
-												EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Invidente", 0).SetValueStr(Invidente);
+                                                EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
-												#region Email
+                                                #endregion
+                                                #region Braille
 
-												EHFApp.Form.GetFormField("Email", 0).SetValueStr(Email);
-												EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region TelMovil
-
-												EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr(TelMovil);
-												EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Braile", 0).SetValueStr(Braille);
+                                                EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
-												#region TelFijo
+                                                #endregion
+                                                #region Email
 
-												EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr(TelFijo);
-												EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehRetype);
-
-
-												#endregion
-												#region Dir
-
-												EHFApp.Form.GetFormField("Dir", 0).SetValueStr(Dir);
-												EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehRetype);
+                                                EHFApp.Form.GetFormField("Email", 0).SetValueStr(Email);
+                                                EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
 
 
-												#endregion
+                                                #endregion
+                                                #region TelMovil
 
-												//Esta en INterpretacion
-												EHFApp.Field.SetValueStr(Buffer);
-												EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-												EHFApp.SetReturnValue(0, "Y");
-												Captura22 = true;
-												GC.Collect();
-												return (int)ehReturnValue.EV_OK;
+                                                EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr(TelMovil);
+                                                EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehRetype);
 
-											}
-											else
-											{
-												//Esta en ANI
-												Dictionary<string, object> parametros2 = new Dictionary<string, object>();
-												parametros2.Add("@Cedula", Buffer);
-												parametros2.Add("@Nombre", EHFApp.Form.GetEHKey());
-												parametros2.Add("@opcion", "2");
-												DataTable dt2 = ExecuteSPCon(conexion,"[dbo].[Traking_Validacion_Verify]", parametros2);
 
-												resultado = dt2.Rows[0][0].ToString();
-												if (resultado == "1")
-												{
-													Captura22 = true;
-													string Cedula = dt2.Rows[0]["cedula"].ToString();
-													string Prinombre = dt2.Rows[0]["Nombre1"].ToString();
-													string Segnombre = dt2.Rows[0]["Nombre2"].ToString();
-													string Priapellido = dt2.Rows[0]["Apellido1"].ToString();
-													string Segapellido = dt2.Rows[0]["Apellido2"].ToString();
-													string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
+                                                #endregion
+                                                #region TelFijo
+
+                                                EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr(TelFijo);
+                                                EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehRetype);
+
+
+                                                #endregion
+                                                #region Dir
+
+                                                EHFApp.Form.GetFormField("Dir", 0).SetValueStr(Dir);
+                                                EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehRetype);
+
+
+                                                #endregion
+
+                                                //Esta en INterpretacion
+                                                EHFApp.Field.SetValueStr(Buffer);
+                                                EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                                EHFApp.SetReturnValue(0, "Y");
+                                                Captura22 = true;
+                                                GC.Collect();
+                                                return (int)ehReturnValue.EV_OK;
+
+                                            }
+                                            else
+                                            {
+                                                //Esta en ANI
+                                                Dictionary<string, object> parametros2 = new Dictionary<string, object>();
+                                                parametros2.Add("@Cedula", Buffer);
+                                                parametros2.Add("@Nombre", EHFApp.Form.GetEHKey());
+                                                parametros2.Add("@opcion", "2");
+                                                DataTable dt2 = ExecuteSPCon(conexion, "[dbo].[Traking_Validacion_Verify]", parametros2);
+
+                                                resultado = dt2.Rows[0][0].ToString();
+                                                if (resultado == "1")
+                                                {
+                                                    Captura22 = true;
+                                                    string Cedula = dt2.Rows[0]["cedula"].ToString();
+                                                    string Prinombre = dt2.Rows[0]["Nombre1"].ToString();
+                                                    string Segnombre = dt2.Rows[0]["Nombre2"].ToString();
+                                                    string Priapellido = dt2.Rows[0]["Apellido1"].ToString();
+                                                    string Segapellido = dt2.Rows[0]["Apellido2"].ToString();
+                                                    string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
 
 
                                                     Fexpedicion = DateTime.Parse(Fexpedicion).ToString("dd/MM/yyyy");
-                                                  
-													string ano = Fexpedicion.Substring(6, 4);
-													string Mes = Fexpedicion.Substring(3, 2);
-													string Dia = Fexpedicion.Substring(0, 2);
+
+                                                    string ano = Fexpedicion.Substring(6, 4);
+                                                    string Mes = Fexpedicion.Substring(3, 2);
+                                                    string Dia = Fexpedicion.Substring(0, 2);
 
 
-													#region Primer nombre
-													if (Prinombre != "%")
-													{
-														EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
-														EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region Segundo nombre
-													if (Segnombre != "%")
-													{
-														EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
-														EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region primer nombre
-													if (Priapellido != "%")
-													{
-														EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
-														EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region segundo apellido
-													if (Segapellido != "%")
-													{
-														EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
-														EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region año
-													if (ano != "%")
-													{
-														EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
-														EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region mes
-													if (Mes != "%")
-													{
-														EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
-														EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-													#region Dia
-													if (Dia != "%")
-													{
-														EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
-														EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-													}
-													#endregion
-												}
-												else
-												{
+                                                    #region Primer nombre
+                                                    if (Prinombre != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
+                                                        EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region Segundo nombre
+                                                    if (Segnombre != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
+                                                        EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region primer nombre
+                                                    if (Priapellido != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
+                                                        EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region segundo apellido
+                                                    if (Segapellido != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
+                                                        EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region año
+                                                    if (ano != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
+                                                        EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region mes
+                                                    if (Mes != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
+                                                        EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                    #region Dia
+                                                    if (Dia != "%")
+                                                    {
+                                                        EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
+                                                        EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    }
+                                                    #endregion
+                                                }
+                                                else
+                                                {
 
-													EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-
-													EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
-
-													#region Nvlestudio
-
-													EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
-													EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
-													EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
-													EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
-
-													EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehValidationError);
 
 
-													EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
-													EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-													EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+                                                    #region Nvlestudio
+
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
+
+                                                    EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
 
 
-													EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
-													EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
-													EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
-													EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+                                                    EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-													#endregion
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
 
-												}
-											}
-										}
-									}
 
-									#endregion
-								}
+                                                    EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
+                                                    EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                                                    EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
 
-							}
-							else
-							{
-								ClassData.NumeroIntentosCaptura2++;
-								MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								EHFApp.Field.SetValueStr("");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK_ABORT;
-							}
-							#endregion
-						}
-						else if (campo.ToUpper() == "ANULADO")
-						{
-							#region Anulado
-							Resultado = ValidacaionDeCampos(campo, Buffer);
-							if (Resultado)
-							{
-								if (Buffer.ToUpper() == "SI")
-								{
-									ClassData.Braile = false;
-									ClassData.Invidente = false;
-									ClassData.Nvlestudio = false;
-									ClassData.Genero = false;
-									ClassData.Capacidad = false;
-									DataTable ObjTrazabilidad = GetDataTableBasico();
-									string Nombre = EHFApp.Form.GetEHKey();
-									string usuario = EHFApp.GetUserName().Trim();
-									string Cedula = "";
+                                                    #endregion
 
-									for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-									{
+                                                }
+                                            }
+                                        }
+                                    }
 
-										campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-										valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-										string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+                                    #endregion
+                                }
 
-										valor = "";
-										EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-										EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-										if (campo != "Anulado")
-										{
+                            }
+                            else
+                            {
+                                ClassData.NumeroIntentosCaptura2++;
+                                MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                EHFApp.Field.SetValueStr("");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK_ABORT;
+                            }
+                            #endregion
+                        }
+                        else if (campo.ToUpper() == "ANULADO")
+                        {
+                            #region Anulado
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+                            if (Resultado)
+                            {
+                                if (Buffer.ToUpper() == "SI")
+                                {
+                                    ClassData.Braile = false;
+                                    ClassData.Invidente = false;
+                                    ClassData.Nvlestudio = false;
+                                    ClassData.Genero = false;
+                                    ClassData.Capacidad = false;
+                                    DataTable ObjTrazabilidad = GetDataTableBasico();
+                                    string Nombre = EHFApp.Form.GetEHKey();
+                                    string usuario = EHFApp.GetUserName().Trim();
+                                    string Cedula = "";
 
-											if (campo == "Braile" || campo == "Nvlestudio" || campo == "Invidente" || campo == "Genero" || campo == "Capacidad")
-											{
+                                    for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                                    {
 
-												EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-												EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-												valor = ValidarCampos(campo, valor, ObjTrazabilidad);
-												if (valor != "%")
-												{
-													ObjTrazabilidad.Rows.Add(campo, "", "0", usuario);
-												}
-											}
-											else
-											{
-												EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-												// EHFApp.Form.SetStatus(ehFormStatus.ehInterpretError);
-												ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
-											}
-										}
-										else
-										{
-											EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
-											EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehComplete);
-											ObjTrazabilidad.Rows.Add(campo, "SI", "1", usuario);
-										}
+                                        campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                                        valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                                        string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
 
-										//  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                        valor = "";
+                                        EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                        EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                        if (campo != "Anulado")
+                                        {
 
-									}
+                                            if (campo == "Braile" || campo == "Nvlestudio" || campo == "Invidente" || campo == "Genero" || campo == "Capacidad")
+                                            {
 
-									ObjTrazabilidad.AcceptChanges();
-									ExcuteTrazabilidad(Nombre, ObjTrazabilidad, 3);
+                                                EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                                valor = ValidarCampos(campo, valor, ObjTrazabilidad);
+                                                if (valor != "%")
+                                                {
+                                                    ObjTrazabilidad.Rows.Add(campo, "", "0", usuario);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                                // EHFApp.Form.SetStatus(ehFormStatus.ehInterpretError);
+                                                ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
+                                            EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            ObjTrazabilidad.Rows.Add(campo, "SI", "1", usuario);
+                                        }
 
-									EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
-									EHFApp.Form.SetQueues(2);
-									(EHFApp as VerifyApp).SkipForm(1);
-									GC.Collect();
-									return (int)ehReturnValue.EV_OK;
-								}
-							}
-							else
-							{
-								ClassData.NumeroIntentosCaptura2++;
-								MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								EHFApp.Field.SetValueStr("");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK_ABORT;
-							}
-							#endregion
-						}
-						else
-						{
+                                        //  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
 
-							Resultado = ValidacaionDeCampos(campo, Buffer);
-							if (!Resultado)
-							{
-								#region Fecha inscripcion
-								if (campo.ToUpper().StartsWith("FI"))
-								{
-									if (Buffer.Length == 2)
-									{
-										if (Buffer == "00")
-										{
-											EHFApp.Form.GetFormField("finsdia", 0).SetValueStr("00");
-											EHFApp.Form.GetFormField("finsmes", 0).SetValueStr("00");
-											EHFApp.Form.GetFormField("finsano", 0).SetValueStr("0");
-											EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehComplete);
-											EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehComplete);
-											EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehComplete);
-											Resultado = true;
-										}
-									}
-								}
-								#endregion
-								#region Fecha Expedicion
-								if (campo.ToUpper().StartsWith("FE"))
-								{
-									if (Buffer.Length == 2)
-									{
-										if (Buffer == "00")
-										{
+                                    }
 
-											EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("00");
-											EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("00");
-											EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("0000");
-											EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
-											EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
-											EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
-											Resultado = true;
-										}
-									}
-								}
-								#endregion
+                                    ObjTrazabilidad.AcceptChanges();
+                                    ExcuteTrazabilidad(Nombre, ObjTrazabilidad, 3);
 
-								if (Resultado)
-								{
-									ClassData.NumeroIntentosCaptura2 = 0;
-									ClassData.VlrAprobado = "";
-									EHFApp.Field.SetValueStr(Buffer);
-									EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-									EHFApp.SetReturnValue(0, "Y");
-									GC.Collect();
-									return (int)ehReturnValue.EV_OK;
-								}
-								else
-								{
-									ClassData.NumeroIntentosCaptura2++;
-									MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-									EHFApp.Field.SetValueStr("");
-									GC.Collect();
-									return (int)ehReturnValue.EV_OK_ABORT;
-								}
-							}
-							else
-							{
+                                    EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
+                                    EHFApp.Form.SetQueues(2);
+                                    (EHFApp as VerifyApp).SkipForm(1);
+                                    GC.Collect();
+                                    return (int)ehReturnValue.EV_OK;
+                                }
+                            }
+                            else
+                            {
+                                ClassData.NumeroIntentosCaptura2++;
+                                MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                EHFApp.Field.SetValueStr("");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK_ABORT;
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+                            if (!Resultado)
+                            {
+                                #region Fecha inscripcion
+                                if (campo.ToUpper().StartsWith("FI"))
+                                {
+                                    if (Buffer.Length == 2)
+                                    {
+                                        if (Buffer == "00")
+                                        {
+                                            EHFApp.Form.GetFormField("finsdia", 0).SetValueStr("00");
+                                            EHFApp.Form.GetFormField("finsmes", 0).SetValueStr("00");
+                                            EHFApp.Form.GetFormField("finsano", 0).SetValueStr("0");
+                                            EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            Resultado = true;
+                                        }
+                                    }
+                                }
+                                #endregion
+                                #region Fecha Expedicion
+                                if (campo.ToUpper().StartsWith("FE"))
+                                {
+                                    if (Buffer.Length == 2)
+                                    {
+                                        if (Buffer == "00")
+                                        {
+
+                                            EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("00");
+                                            EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("00");
+                                            EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("0000");
+                                            EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehComplete);
+                                            Resultado = true;
+                                        }
+                                    }
+                                }
+                                #endregion
+
+                                if (Resultado)
+                                {
+                                    ClassData.NumeroIntentosCaptura2 = 0;
+                                    ClassData.VlrAprobado = "";
+                                    EHFApp.Field.SetValueStr(Buffer);
+                                    EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                    EHFApp.SetReturnValue(0, "Y");
+                                    GC.Collect();
+                                    return (int)ehReturnValue.EV_OK;
+                                }
+                                else
+                                {
+                                    ClassData.NumeroIntentosCaptura2++;
+                                    MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    EHFApp.Field.SetValueStr("");
+                                    GC.Collect();
+                                    return (int)ehReturnValue.EV_OK_ABORT;
+                                }
+                            }
+                            else
+                            {
 
                                 ClassData.NumeroIntentosCaptura2 = 0;
                                 ClassData.VlrAprobado = "";
-                                if (campo=="Email")
-                                {EHFApp.Field.SetValueStr(Buffer); }
-                                
+                                if (campo == "Email")
+                                { EHFApp.Field.SetValueStr(Buffer); }
+
                                 EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-								EHFApp.SetReturnValue(0, "Y");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK;
-							}
-						}
+                                EHFApp.SetReturnValue(0, "Y");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK;
+                            }
+                        }
 
-						#endregion
-
-
-					}
+                        #endregion
 
 
-					else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
-
-						if (campo == "cedula")
-						{
-							#region cedula
-							Resultado = ValidacaionDeCampos(campo, Buffer);
-							if (Resultado)
-							{
-
-								if (Buffer == "")
-								{
-									EHFApp.Field.SetValueStr(Buffer);
-									MessageBox.Show("El Campo no permite valores en blanco", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-									GC.Collect();
-									return (int)ehReturnValue.EV_OK_ABORT;
-								}
-								else
-								{
+                    }
 
 
-									#region Cedula con datos
+                    else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
 
-									if (Buffer.Length < 5)
-									{
-										Resultado = false;
-										// EHFApp.Field.SetValueStr(Buffer);
-										GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-									}
-									else if (Buffer.Length == 5)
-									{
-										if (Buffer == "00000")
-										{
-											Resultado = true;
-											EHFApp.Form.GetFormField(campo, 0).SetStatus(ehFieldStatus.ehComplete);
-										}
-										else
-										{
-											Resultado = false;
-											Resultado = false;
-											// EHFApp.Field.SetValueStr(Buffer);
-											GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-										}
-									}
-									else
-									{
-										if (Buffer == "")
-										{
-											EHFApp.Field.SetValueStr(Buffer);
-											GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-										}
-										else if (ValorCapturado != valor)
-										{
-											if (Buffer != "")
-											{
-												EHFApp.Field.SetValueStr(Buffer);
-												// MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-												GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
-											}
+                        if (campo == "cedula")
+                        {
+                            #region cedula
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+                            if (Resultado)
+                            {
 
-										}
-										else
-										{
-											#region Ventana
-											string codigoBarras = GetParametroIni("ventana");
-											if (codigoBarras == "1")
-											{
-												string nombreDoc = EHFApp.Form.GetEHKey();
-												Dictionary<string, object> parametros = new Dictionary<string, object>();
-												parametros.Add("Nombre", nombreDoc);
-												parametros.Add("campoForms", campo);
-												parametros.Add("campo", campo);
-												parametros.Add("opcion", "0");
-												DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Cap_Anteriores2]", parametros);
-												if (!validarSegundaCaptura(dt, valor))
-												{
-													int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
-													if (ClassData.NumeroIntentosCaptura2 >= Nintento)
-													{
-														MensajeCorregir obj = new MensajeCorregir();
-														obj.ShowDialog();
-														GC.Collect();
-														if (ClassData.VlrAprobado != "")
-														{
-															ClassData.NumeroIntentosCaptura2 = 0;
-
-															EHFApp.Field.SetValueStr(ClassData.VlrAprobado);
-															ClassData.VlrAprobado = "";
-															EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-															OnFieldComplete();
-															EHFApp.SetReturnValue(0, "Y");
-															GC.Collect();
-															return (int)ehReturnValue.EV_OK;
-														}
-														else
-														{
-															GC.Collect();
-															return (int)ehReturnValue.EV_OK_ABORT;
-														}
-													}
-													else
-													{
-														ClassData.NumeroIntentosCaptura2++;
-														EHFApp.Field.SetValueStr("");
-														GC.Collect();
-														return (int)ehReturnValue.EV_OK_ABORT;
-													}
-
-												}
-											}
-											#endregion
-										}
-									}
-
-									#endregion
-								}
-
-							}
-							else
-							{
-								ClassData.NumeroIntentosCaptura2++;
-								MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								EHFApp.Field.SetValueStr("");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK_ABORT;
-							}
-							#endregion
-						}
-						else if (campo.ToUpper() == "ANULADO")
-						{
-							Resultado = ValidacaionDeCampos(campo, Buffer);
-							if (Resultado)
-							{
-
-								if (Buffer.ToUpper() == "SI")
-								{
-									ClassData.Braile = false;
-									ClassData.Invidente = false;
-									ClassData.Nvlestudio = false;
-									ClassData.Genero = false;
-									ClassData.Capacidad = false;
-									DataTable ObjTrazabilidad = GetDataTableBasico();
-									string Nombre = EHFApp.Form.GetEHKey();
-									string usuario = EHFApp.GetUserName().Trim();
-									string Cedula = "";
-
-									for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-									{
-										//if (EHFApp.Form.GetFormFieldNo(i).GetValueStr().Contains("#ErrorCaptura#"))
-										campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-										valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-										string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
-
-										valor = "";
-										if (campo != "Anulado")
-										{
-											EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-										}
-										EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-
-										//  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-
-									}
-								}
-								EHFApp.Field.SetValueStr(Buffer);
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK;
-							}
-							else
-							{
-								ClassData.NumeroIntentosCaptura2++;
-								MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								EHFApp.Field.SetValueStr("");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK_ABORT;
-							}
+                                if (Buffer == "")
+                                {
+                                    EHFApp.Field.SetValueStr(Buffer);
+                                    MessageBox.Show("El Campo no permite valores en blanco", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    GC.Collect();
+                                    return (int)ehReturnValue.EV_OK_ABORT;
+                                }
+                                else
+                                {
 
 
-						}
-						else
-						{
-							#region No REQUERIDOS
-							Resultado = ValidacaionDeCampos(campo, Buffer);
+                                    #region Cedula con datos
 
-							if (Resultado)
-							{
+                                    if (Buffer.Length < 5)
+                                    {
+                                        Resultado = false;
+                                        // EHFApp.Field.SetValueStr(Buffer);
+                                        GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                    }
+                                    else if (Buffer.Length == 5)
+                                    {
+                                        if (Buffer == "00000")
+                                        {
+                                            Resultado = true;
+                                            EHFApp.Form.GetFormField(campo, 0).SetStatus(ehFieldStatus.ehComplete);
+                                        }
+                                        else
+                                        {
+                                            Resultado = false;
+                                            Resultado = false;
+                                            // EHFApp.Field.SetValueStr(Buffer);
+                                            GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Buffer == "")
+                                        {
+                                            EHFApp.Field.SetValueStr(Buffer);
+                                            GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                        }
+                                        else if (ValorCapturado != valor)
+                                        {
+                                            if (Buffer != "")
+                                            {
+                                                EHFApp.Field.SetValueStr(Buffer);
+                                                // MessageBox.Show("El Campo: " + campo + " --No coincide--" + valor + " --- " + ValorCapturado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                GC.Collect(); return (int)ehReturnValue.EV_OK_ABORT;
+                                            }
 
-								if (campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2" || campo == "cedula" || campo == "fexpedia"
-							 || campo == "fexpemes" || campo == "fexpeano" || campo == "finsdia" || campo == "finsmes" || campo == "finsano")
-								{
+                                        }
+                                        else
+                                        {
+                                            #region Ventana
+                                            string codigoBarras = GetParametroIni("ventana");
+                                            if (codigoBarras == "1")
+                                            {
+                                                string nombreDoc = EHFApp.Form.GetEHKey();
+                                                Dictionary<string, object> parametros = new Dictionary<string, object>();
+                                                parametros.Add("Nombre", nombreDoc);
+                                                parametros.Add("campoForms", campo);
+                                                parametros.Add("campo", campo);
+                                                parametros.Add("opcion", "0");
+                                                DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Cap_Anteriores2]", parametros);
+                                                if (!validarSegundaCaptura(dt, valor))
+                                                {
+                                                    int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
+                                                    if (ClassData.NumeroIntentosCaptura2 >= Nintento)
+                                                    {
+                                                        MensajeCorregir obj = new MensajeCorregir();
+                                                        obj.ShowDialog();
+                                                        GC.Collect();
+                                                        if (ClassData.VlrAprobado != "")
+                                                        {
+                                                            ClassData.NumeroIntentosCaptura2 = 0;
+
+                                                            EHFApp.Field.SetValueStr(ClassData.VlrAprobado);
+                                                            ClassData.VlrAprobado = "";
+                                                            EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                                            OnFieldComplete();
+                                                            EHFApp.SetReturnValue(0, "Y");
+                                                            GC.Collect();
+                                                            return (int)ehReturnValue.EV_OK;
+                                                        }
+                                                        else
+                                                        {
+                                                            GC.Collect();
+                                                            return (int)ehReturnValue.EV_OK_ABORT;
+                                                        }
+                                                    }
+                                                    else if (campo == "cedula")
+                                                    {
+                                                        MensajeCorregir obj = new MensajeCorregir();
+                                                        obj.ShowDialog();
+                                                        GC.Collect();
+                                                        if (ClassData.VlrAprobado != "")
+                                                        {
+                                                            ClassData.NumeroIntentosCaptura2 = 0;
+
+                                                            EHFApp.Field.SetValueStr(ClassData.VlrAprobado);
+                                                            ClassData.VlrAprobado = "";
+                                                            EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                                            OnFieldComplete();
+                                                            EHFApp.SetReturnValue(0, "Y");
+                                                            GC.Collect();
+                                                            return (int)ehReturnValue.EV_OK;
+                                                        }
+                                                        else
+                                                        {
+                                                            GC.Collect();
+                                                            return (int)ehReturnValue.EV_OK_ABORT;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        ClassData.NumeroIntentosCaptura2++;
+                                                        EHFApp.Field.SetValueStr("");
+                                                        GC.Collect();
+                                                        return (int)ehReturnValue.EV_OK_ABORT;
+                                                    }
+
+                                                }
+                                            }
+                                            #endregion
+                                        }
+                                    }
+
+                                    #endregion
+                                }
+
+                            }
+                            else
+                            {
+                                ClassData.NumeroIntentosCaptura2++;
+                                MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                EHFApp.Field.SetValueStr("");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK_ABORT;
+                            }
+                            #endregion
+                        }
+                        else if (campo.ToUpper() == "ANULADO")
+                        {
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+                            if (Resultado)
+                            {
+
+                                if (Buffer.ToUpper() == "SI")
+                                {
+                                    ClassData.Braile = false;
+                                    ClassData.Invidente = false;
+                                    ClassData.Nvlestudio = false;
+                                    ClassData.Genero = false;
+                                    ClassData.Capacidad = false;
+                                    DataTable ObjTrazabilidad = GetDataTableBasico();
+                                    string Nombre = EHFApp.Form.GetEHKey();
+                                    string usuario = EHFApp.GetUserName().Trim();
+                                    string Cedula = "";
+
+                                    for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                                    {
+                                        //if (EHFApp.Form.GetFormFieldNo(i).GetValueStr().Contains("#ErrorCaptura#"))
+                                        campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                                        valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                                        string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+
+                                        valor = "";
+                                        if (campo != "Anulado")
+                                        {
+                                            EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                        }
+                                        EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+
+                                        //  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+
+                                    }
+                                }
+                                EHFApp.Field.SetValueStr(Buffer);
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK;
+                            }
+                            else
+                            {
+                                ClassData.NumeroIntentosCaptura2++;
+                                MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                EHFApp.Field.SetValueStr("");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK_ABORT;
+                            }
 
 
-									#region Ventana
+                        }
+                        else
+                        {
+                            #region No REQUERIDOS
+                            Resultado = ValidacaionDeCampos(campo, Buffer);
+
+                            if (Resultado)
+                            {
+
+                                if (campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2" || campo == "cedula" || campo == "fexpedia"
+                                 || campo == "fexpemes" || campo == "fexpeano" || campo == "finsdia" || campo == "finsmes" || campo == "finsano")
+                                {
 
 
-									string codigoBarras = GetParametroIni("ventana");
-									if (codigoBarras == "1")
-									{
-										string nombreDoc = EHFApp.Form.GetEHKey();
-										Dictionary<string, object> parametros = new Dictionary<string, object>();
-										parametros.Add("Nombre", nombreDoc);
-										parametros.Add("campoForms", campo);
-										parametros.Add("campo", campo);
-										parametros.Add("opcion", "0");
-										DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Cap_Anteriores2]", parametros);
-										if (!validarSegundaCaptura(dt, Buffer))
-										{
-											int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
-											if (ClassData.NumeroIntentosCaptura2 >= Nintento)
-											{
-												MensajeCorregir obj = new MensajeCorregir();
-												obj.ShowDialog();
-												GC.Collect();
-												if (ClassData.VlrAprobado != "")
-												{
+                                    #region Ventana
 
 
-													ClassData.NumeroIntentosCaptura2 = 0;
+                                    string codigoBarras = GetParametroIni("ventana");
+                                    if (codigoBarras == "1")
+                                    {
+                                        string nombreDoc = EHFApp.Form.GetEHKey();
+                                        Dictionary<string, object> parametros = new Dictionary<string, object>();
+                                        parametros.Add("Nombre", nombreDoc);
+                                        parametros.Add("campoForms", campo);
+                                        parametros.Add("campo", campo);
+                                        parametros.Add("opcion", "0");
+                                        DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Cap_Anteriores2]", parametros);
+                                        if (!validarSegundaCaptura(dt, Buffer))
+                                        {
+                                            int Nintento = int.Parse(GetParametroIni("NumeroIntentos"));
+                                            if (ClassData.NumeroIntentosCaptura2 >= Nintento)
+                                            {
+                                                MensajeCorregir obj = new MensajeCorregir();
+                                                obj.ShowDialog();
+                                                GC.Collect();
+                                                if (ClassData.VlrAprobado != "")
+                                                {
 
-													EHFApp.Field.SetValueStr(ClassData.VlrAprobado);
-													ClassData.VlrAprobado = "";
-													EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-													// OnFieldComplete();
-													EHFApp.SetReturnValue(0, "Y");
-													GC.Collect();
-													return (int)ehReturnValue.EV_OK;
-												}
-												else
-												{
-													GC.Collect();
-													return (int)ehReturnValue.EV_OK_ABORT;
-												}
-											}
-											else
-											{
-												ClassData.NumeroIntentosCaptura2++;
-												EHFApp.Field.SetValueStr("");
-												GC.Collect();
-												return (int)ehReturnValue.EV_OK_ABORT;
-											}
 
-										}
-										else
-										{
-											ClassData.NumeroIntentosCaptura2++;
-											//  MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-											EHFApp.Field.SetValueStr(Buffer);
-											GC.Collect();
-											return (int)ehReturnValue.EV_OK;
-										}
-									}
-									#endregion
+                                                    ClassData.NumeroIntentosCaptura2 = 0;
 
-								}
+                                                    EHFApp.Field.SetValueStr(ClassData.VlrAprobado);
+                                                    ClassData.VlrAprobado = "";
+                                                    EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                                    // OnFieldComplete();
+                                                    EHFApp.SetReturnValue(0, "Y");
+                                                    GC.Collect();
+                                                    return (int)ehReturnValue.EV_OK;
+                                                }
+                                                else
+                                                {
+                                                    GC.Collect();
+                                                    return (int)ehReturnValue.EV_OK_ABORT;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                ClassData.NumeroIntentosCaptura2++;
+                                                EHFApp.Field.SetValueStr("");
+                                                GC.Collect();
+                                                return (int)ehReturnValue.EV_OK_ABORT;
+                                            }
 
-								ClassData.NumeroIntentosCaptura2 = 0;
-								ClassData.VlrAprobado = "";
-								EHFApp.Field.SetValueStr(Buffer);
-								EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
-								EHFApp.SetReturnValue(0, "Y");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK;
-							}
-							else
-							{
-								ClassData.NumeroIntentosCaptura2++;
-								MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								EHFApp.Field.SetValueStr("");
-								GC.Collect();
-								return (int)ehReturnValue.EV_OK_ABORT;
-							}
-							#endregion
+                                        }
+                                        else
+                                        {
+                                            ClassData.NumeroIntentosCaptura2++;
+                                            //  MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            EHFApp.Field.SetValueStr(Buffer);
+                                            GC.Collect();
+                                            return (int)ehReturnValue.EV_OK;
+                                        }
+                                    }
+                                    #endregion
 
-						}
-					}
+                                }
+
+                                ClassData.NumeroIntentosCaptura2 = 0;
+                                ClassData.VlrAprobado = "";
+                                EHFApp.Field.SetValueStr(Buffer);
+                                EHFApp.Field.SetStatus(ehFieldStatus.ehComplete);
+                                EHFApp.SetReturnValue(0, "Y");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK;
+                            }
+                            else
+                            {
+                                ClassData.NumeroIntentosCaptura2++;
+                                MessageBox.Show("Valor Digitado no valido", "Notificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                EHFApp.Field.SetValueStr("");
+                                GC.Collect();
+                                return (int)ehReturnValue.EV_OK_ABORT;
+                            }
+                            #endregion
+
+                        }
+                    }
                 }
 
                 EHFApp.Field.SetValueStr(Buffer);
@@ -3225,7 +3249,7 @@ namespace BasicAPI
                 long num5;
                 string campo = EHFApp.Field.GetName().ToString();
                 string valor = EHFApp.Field.GetValueStr().ToString();
-                
+
                 if (campo != ClassData.UsuarioNumeroIntentosCaptura2)
                 {
                     //   EHFApp.Field.SetValueStr(valor);
@@ -3250,7 +3274,7 @@ namespace BasicAPI
                                 {
                                     OnFieldRetyped(valor);
                                 }
-                                
+
                             }
 
                         }
@@ -3411,10 +3435,11 @@ namespace BasicAPI
                                 GC.Collect();
                                 return (int)ehReturnValue.EV_OK;
                             }
-                            else { 
-                            
+                            else
+                            {
+
                             }
-                            
+
                         }
                         else
                         {
@@ -3427,28 +3452,56 @@ namespace BasicAPI
                     }
                     else
                     {
-                        //
-                        if (campo == "TelMovil" || campo == "finsdia")
+                        if (campo == "Nvlestudio")
                         {
-                            if (EHFApp.Field.GetStatus() != ehFieldStatus.ehComplete)
-                            {
+                             
+                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr(string.Empty);
+                                EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr(string.Empty);
+                                EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr(string.Empty);
+                                EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
 
-                                EHFApp.Field.SetStatus(ehFieldStatus.ehValidationError);
-                                bool Resultado_ = false;
-                                Resultado_ = ValidacaionDeCampos(campo, valor);
-                                if (Resultado_)
-                                {
-                                    GC.Collect();
-                                    return (int)ehReturnValue.EV_OK;
-                                }
-                                else
-                                {
-                                    GC.Collect();
-                                    return (int)ehReturnValue.EV_OK;
-                                }
-                            }
+                            
                         }
-                      
+                        if (campo == "Genero")
+                        {
+
+                            EHFApp.Form.GetFormField("Genero", 2).SetValueStr(string.Empty);
+                            EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+                        }
+                        if (campo == "Capacidad")
+                        {
+
+                            EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr(string.Empty);
+                            EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+
+                        }
+
+                        //MOMENTANIAMENTE REMOVIDO
+                        //if (campo == "TelMovil" || campo == "finsdia")
+                        //{
+                        //    if (EHFApp.Field.GetStatus() != ehFieldStatus.ehComplete)
+                        //    {
+
+                        //       // EHFApp.Field.SetStatus(ehFieldStatus.ehValidationError);
+                        //        EHFApp.Field.SetStatus(ehFieldStatus.ehRetype);
+
+                        //        bool Resultado_ = false;
+                        //        Resultado_ = ValidacaionDeCampos(campo, valor);
+                        //        if (Resultado_)
+                        //        {
+                        //            GC.Collect();
+                        //            return (int)ehReturnValue.EV_OK;
+                        //        }
+                        //        else
+                        //        {
+                        //            GC.Collect();
+                        //            return (int)ehReturnValue.EV_OK;
+                        //        }
+                        //    }
+                        //}
+
                     }
                 }
                 else
@@ -3574,349 +3627,349 @@ namespace BasicAPI
                 {
                     if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
                     {
-						if (EHFApp.Job.GetName().ToUpper().Contains("CONSULA"))
-						{
-							bool EstaBien = false;
-							Dictionary<string, object> parametros = new Dictionary<string, object>();
-							parametros.Add("@Nombre", nombreDoc);
-							DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Transfer_Formulario_Consulado]", parametros);
-							if (dt.Rows.Count > 0)
-							{
+                        if (EHFApp.Job.GetName().ToUpper().Contains("CONSULA"))
+                        {
+                            bool EstaBien = false;
+                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                            parametros.Add("@Nombre", nombreDoc);
+                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Transfer_Formulario_Consulado]", parametros);
+                            if (dt.Rows.Count > 0)
+                            {
 
 
-								#region Variables
-								String NombreFormulario = dt.Rows[0][0].ToString();
-								String RutaFormulario = dt.Rows[0][1].ToString();
-								FileInfo Archivo = new FileInfo(imagen);
-								string HexaFormulario = Archivo.Name.Replace(".TIF", "").ToString();
+                                #region Variables
+                                String NombreFormulario = dt.Rows[0][0].ToString();
+                                String RutaFormulario = dt.Rows[0][1].ToString();
+                                FileInfo Archivo = new FileInfo(imagen);
+                                string HexaFormulario = Archivo.Name.Replace(".TIF", "").ToString();
 
-								FileInfo ArchivoCp1 = new FileInfo(Archivo.DirectoryName + "\\" + HexaFormulario + "_Cupon1.BMP");
-								if (!ArchivoCp1.Exists)
-								{
-									string DosUltimos = HexaFormulario.Substring(HexaFormulario.Length - 2, 2);
-									String NuevoDosUltimo = (int.Parse(DosUltimos) - 2).ToString().PadLeft(2, '0');
-									String Comienzo = HexaFormulario.Substring(0, HexaFormulario.Length - 2);
-									Comienzo = Comienzo + NuevoDosUltimo;
-									FileInfo Archivo2Cp1 = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + "_Cupon1.BMP");
-									if (Archivo2Cp1.Exists)
-									{
-										Archivo = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + ".TIF");
-										EstaBien = true;
-									}
-								}
-								else
-								{
-									EstaBien = true;
-								}
+                                FileInfo ArchivoCp1 = new FileInfo(Archivo.DirectoryName + "\\" + HexaFormulario + "_Cupon1.BMP");
+                                if (!ArchivoCp1.Exists)
+                                {
+                                    string DosUltimos = HexaFormulario.Substring(HexaFormulario.Length - 2, 2);
+                                    String NuevoDosUltimo = (int.Parse(DosUltimos) - 2).ToString().PadLeft(2, '0');
+                                    String Comienzo = HexaFormulario.Substring(0, HexaFormulario.Length - 2);
+                                    Comienzo = Comienzo + NuevoDosUltimo;
+                                    FileInfo Archivo2Cp1 = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + "_Cupon1.BMP");
+                                    if (Archivo2Cp1.Exists)
+                                    {
+                                        Archivo = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + ".TIF");
+                                        EstaBien = true;
+                                    }
+                                }
+                                else
+                                {
+                                    EstaBien = true;
+                                }
 
-								if (EstaBien)
-								{
-									string Directory = Archivo.Directory.ToString() + "\\";
-									string Cupon1 = Archivo.Name.Replace(".TIF", "_Cupon1.BMP");
-									string Cupon2 = Archivo.Name.Replace(".TIF", "_Cupon2.BMP");
-									string Cupon3 = Archivo.Name.Replace(".TIF", "_Cupon3.BMP");
-								 
-									#endregion
+                                if (EstaBien)
+                                {
+                                    string Directory = Archivo.Directory.ToString() + "\\";
+                                    string Cupon1 = Archivo.Name.Replace(".TIF", "_Cupon1.BMP");
+                                    string Cupon2 = Archivo.Name.Replace(".TIF", "_Cupon2.BMP");
+                                    string Cupon3 = Archivo.Name.Replace(".TIF", "_Cupon3.BMP");
 
-									#region Renombra Archivo
-									DirectoryInfo Dir = new DirectoryInfo(Directory + "Cupon\\");
-									if (!Dir.Exists) { Dir.Create(); }
+                                    #endregion
 
-									DirectoryInfo Form = new DirectoryInfo(Directory + "Formulario\\");
-									if (!Form.Exists) { Form.Create(); }
+                                    #region Renombra Archivo
+                                    DirectoryInfo Dir = new DirectoryInfo(Directory + "Cupon\\");
+                                    if (!Dir.Exists) { Dir.Create(); }
 
-									string Directory2 = Directory + "Cupon\\";
-									GuardarImagenTiff(300, Directory + Cupon1, RutaFormulario + NombreFormulario + "-Cupon1.Tif");
-									GuardarImagenTiff(300, Directory + Cupon2, RutaFormulario + NombreFormulario + "-Cupon2.Tif");
-									GuardarImagenTiff(300, Directory + Cupon3, RutaFormulario + NombreFormulario + "-Cupon3.Tif");
+                                    DirectoryInfo Form = new DirectoryInfo(Directory + "Formulario\\");
+                                    if (!Form.Exists) { Form.Create(); }
 
-									File.Copy(RutaFormulario + NombreFormulario + "-Cupon1.Tif", Directory2 + NombreFormulario + "-Cupon1.Tif", true);
-									File.Copy(RutaFormulario + NombreFormulario + "-Cupon2.Tif", Directory2 + NombreFormulario + "-Cupon2.Tif", true);
-									File.Copy(RutaFormulario + NombreFormulario + "-Cupon3.Tif", Directory2 + NombreFormulario + "-Cupon3.Tif", true);
+                                    string Directory2 = Directory + "Cupon\\";
+                                    GuardarImagenTiff(300, Directory + Cupon1, RutaFormulario + NombreFormulario + "-Cupon1.Tif");
+                                    GuardarImagenTiff(300, Directory + Cupon2, RutaFormulario + NombreFormulario + "-Cupon2.Tif");
+                                    GuardarImagenTiff(300, Directory + Cupon3, RutaFormulario + NombreFormulario + "-Cupon3.Tif");
 
-									FileInfo a = new FileInfo(Directory2 + NombreFormulario + "-Cupon1.BMP");
-									if (a.Exists)
-									{
-										File.Move(Directory2 + NombreFormulario + "-Cupon1.BMP", Directory2 + NombreFormulario + "-Cupon1.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
-									}
-									FileInfo b = new FileInfo(Directory2 + NombreFormulario + "-Cupon2.BMP");
-									if (b.Exists)
-									{
-										File.Move(Directory2 + NombreFormulario + "-Cupon2.BMP", Directory2 + NombreFormulario + "-Cupon2.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
-										b.Delete();
-									}
+                                    File.Copy(RutaFormulario + NombreFormulario + "-Cupon1.Tif", Directory2 + NombreFormulario + "-Cupon1.Tif", true);
+                                    File.Copy(RutaFormulario + NombreFormulario + "-Cupon2.Tif", Directory2 + NombreFormulario + "-Cupon2.Tif", true);
+                                    File.Copy(RutaFormulario + NombreFormulario + "-Cupon3.Tif", Directory2 + NombreFormulario + "-Cupon3.Tif", true);
 
-									FileInfo c = new FileInfo(Directory2 + NombreFormulario + "-Cupon3.BMP");
-									if (c.Exists)
-									{
-										File.Move(Directory2 + NombreFormulario + "-Cupon3.BMP", Directory2 + NombreFormulario + "-Cupon3.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
-										c.Delete();
-									}
+                                    FileInfo a = new FileInfo(Directory2 + NombreFormulario + "-Cupon1.BMP");
+                                    if (a.Exists)
+                                    {
+                                        File.Move(Directory2 + NombreFormulario + "-Cupon1.BMP", Directory2 + NombreFormulario + "-Cupon1.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
+                                    }
+                                    FileInfo b = new FileInfo(Directory2 + NombreFormulario + "-Cupon2.BMP");
+                                    if (b.Exists)
+                                    {
+                                        File.Move(Directory2 + NombreFormulario + "-Cupon2.BMP", Directory2 + NombreFormulario + "-Cupon2.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
+                                        b.Delete();
+                                    }
 
-									FileInfo d = new FileInfo(Directory + "Formulario\\" + NombreFormulario + ".TIF");
-									if (d.Exists)
-									{
-										File.Move(Directory + "Formulario\\" + NombreFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
-										d.Delete();
-									}
+                                    FileInfo c = new FileInfo(Directory2 + NombreFormulario + "-Cupon3.BMP");
+                                    if (c.Exists)
+                                    {
+                                        File.Move(Directory2 + NombreFormulario + "-Cupon3.BMP", Directory2 + NombreFormulario + "-Cupon3.BMP".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
+                                        c.Delete();
+                                    }
 
-									File.Move(Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.BMP");
-									File.Move(Directory + Cupon2, Directory2 + NombreFormulario + "-Cupon2.BMP");
-									File.Move(Directory + Cupon3, Directory2 + NombreFormulario + "-Cupon3.BMP");
-									 
+                                    FileInfo d = new FileInfo(Directory + "Formulario\\" + NombreFormulario + ".TIF");
+                                    if (d.Exists)
+                                    {
+                                        File.Move(Directory + "Formulario\\" + NombreFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF".ToUpper().ToString().Replace(".BMP", "_1.BMP"));
+                                        d.Delete();
+                                    }
 
-									File.Move(Directory + HexaFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF");
+                                    File.Move(Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.BMP");
+                                    File.Move(Directory + Cupon2, Directory2 + NombreFormulario + "-Cupon2.BMP");
+                                    File.Move(Directory + Cupon3, Directory2 + NombreFormulario + "-Cupon3.BMP");
 
-									#endregion
 
-									//#region Recorte Huella
+                                    File.Move(Directory + HexaFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF");
 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon1.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte1.BMP");
-								 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon2.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte2.BMP");
-								 
+                                    #endregion
 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon3.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte3.BMP");
-							 
- 
-									//#endregion
+                                    //#region Recorte Huella
 
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon1.BMP");
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon2.BMP");
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon3.BMP");
-								 
-									#region trazabilidad
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon1.Fif", NombreFormulario, NombreFormulario + "_Cupon1");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella1.BMP", NombreFormulario, NombreFormulario + "_Cupon1");
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon1.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte1.BMP");
 
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon2.Tif", NombreFormulario, NombreFormulario + "_Cupon2");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella2.BMP", NombreFormulario, NombreFormulario + "_Cupon2");
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon2.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte2.BMP");
 
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon3.Tif", NombreFormulario, NombreFormulario + "_Cupon3");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella3.BMP", NombreFormulario, NombreFormulario + "_Cupon3");
 
-									InsertRecorte("Formulario", Directory + "Formulario\\" + NombreFormulario + ".TIF", NombreFormulario, NombreFormulario);
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon3.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte3.BMP");
 
-									#endregion
 
-								}
-								else
-								{
-									int unio = 0;
-								}
-							}
-							else
-							{
-								FileInfo f = new FileInfo(imagen);
-								string Rut = f.DirectoryName.ToString() + "\\NoEncontradas\\";
+                                    //#endregion
 
-								DirectoryInfo Dir = new DirectoryInfo(Rut);
-								if (!Dir.Exists)
-								{
-									Dir.Create();
-								}
-								try
-								{
-									File.Move(imagen, Dir + f.Name);
-								}
-								catch (Exception ex)
-								{
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon1.BMP");
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon2.BMP");
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon3.BMP");
+
+                                    #region trazabilidad
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon1.Fif", NombreFormulario, NombreFormulario + "_Cupon1");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella1.BMP", NombreFormulario, NombreFormulario + "_Cupon1");
+
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon2.Tif", NombreFormulario, NombreFormulario + "_Cupon2");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella2.BMP", NombreFormulario, NombreFormulario + "_Cupon2");
+
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon3.Tif", NombreFormulario, NombreFormulario + "_Cupon3");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella3.BMP", NombreFormulario, NombreFormulario + "_Cupon3");
+
+                                    InsertRecorte("Formulario", Directory + "Formulario\\" + NombreFormulario + ".TIF", NombreFormulario, NombreFormulario);
+
+                                    #endregion
+
+                                }
+                                else
+                                {
+                                    int unio = 0;
+                                }
+                            }
+                            else
+                            {
+                                FileInfo f = new FileInfo(imagen);
+                                string Rut = f.DirectoryName.ToString() + "\\NoEncontradas\\";
+
+                                DirectoryInfo Dir = new DirectoryInfo(Rut);
+                                if (!Dir.Exists)
+                                {
+                                    Dir.Create();
+                                }
+                                try
+                                {
+                                    File.Move(imagen, Dir + f.Name);
+                                }
+                                catch (Exception ex)
+                                {
                                     Log(ex.ToString());
                                 }
 
 
-							}
+                            }
 
-						}
-						else
-						{
-							bool EstaBien = false;
-							Dictionary<string, object> parametros = new Dictionary<string, object>();
-							parametros.Add("@Nombre", nombreDoc);
-							DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Transfer_Formulario]", parametros);
-							if (dt.Rows.Count > 0)
-							{
-
-
-								#region Variables
-								String NombreFormulario = dt.Rows[0][0].ToString();
-								String RutaFormulario = dt.Rows[0][1].ToString();
-								FileInfo Archivo = new FileInfo(imagen);
-								string HexaFormulario = Archivo.Name.ToUpper().Replace(".TIF", "").ToString();
-
-								FileInfo ArchivoCp1 = new FileInfo(Archivo.DirectoryName + "\\" + HexaFormulario + "_Cupon1.BMP");
-								if (!ArchivoCp1.Exists)
-								{
-									string DosUltimos = HexaFormulario.Substring(HexaFormulario.Length - 2, 2);
-									String NuevoDosUltimo = (int.Parse(DosUltimos) - 2).ToString().PadLeft(2, '0');
-									String Comienzo = HexaFormulario.Substring(0, HexaFormulario.Length - 2);
-									Comienzo = Comienzo + NuevoDosUltimo;
-									FileInfo Archivo2Cp1 = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + "_Cupon1.BMP");
-									if (Archivo2Cp1.Exists)
-									{
-										Archivo = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + ".TIF");
-										EstaBien = true;
-									}
-
-								}
-								else
-								{
-									EstaBien = true;
-								}
-
-								if (EstaBien)
-								{
+                        }
+                        else
+                        {
+                            bool EstaBien = false;
+                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                            parametros.Add("@Nombre", nombreDoc);
+                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Transfer_Formulario]", parametros);
+                            if (dt.Rows.Count > 0)
+                            {
 
 
-									string Directory = Archivo.Directory.ToString() + "\\";
-									string Cupon1 = Archivo.Name.Replace(".TIF", "_Cupon1.BMP");
-									string Cupon2 = Archivo.Name.Replace(".TIF", "_Cupon2.BMP");
-									string Cupon3 = Archivo.Name.Replace(".TIF", "_Cupon3.BMP");
-									string Cupon4 = Archivo.Name.Replace(".TIF", "_Cupon4.BMP");
-									#endregion
+                                #region Variables
+                                String NombreFormulario = dt.Rows[0][0].ToString();
+                                String RutaFormulario = dt.Rows[0][1].ToString();
+                                FileInfo Archivo = new FileInfo(imagen);
+                                string HexaFormulario = Archivo.Name.ToUpper().Replace(".TIF", "").ToString();
 
-									#region Renombra Archivo
-									DirectoryInfo Dir = new DirectoryInfo(Directory + "Cupon\\");
-									if (!Dir.Exists) { Dir.Create(); }
+                                FileInfo ArchivoCp1 = new FileInfo(Archivo.DirectoryName + "\\" + HexaFormulario + "_Cupon1.BMP");
+                                if (!ArchivoCp1.Exists)
+                                {
+                                    string DosUltimos = HexaFormulario.Substring(HexaFormulario.Length - 2, 2);
+                                    String NuevoDosUltimo = (int.Parse(DosUltimos) - 2).ToString().PadLeft(2, '0');
+                                    String Comienzo = HexaFormulario.Substring(0, HexaFormulario.Length - 2);
+                                    Comienzo = Comienzo + NuevoDosUltimo;
+                                    FileInfo Archivo2Cp1 = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + "_Cupon1.BMP");
+                                    if (Archivo2Cp1.Exists)
+                                    {
+                                        Archivo = new FileInfo(Archivo.DirectoryName + "\\" + Comienzo + ".TIF");
+                                        EstaBien = true;
+                                    }
 
-									DirectoryInfo Form = new DirectoryInfo(Directory + "Formulario\\");
-									if (!Form.Exists) { Form.Create(); }
+                                }
+                                else
+                                {
+                                    EstaBien = true;
+                                }
 
-									string Directory2 = Directory + "Cupon\\";
-									GuardarImagenTiff(300, Directory + Cupon1, RutaFormulario + NombreFormulario + "-Cupon1.Tif");
-									GuardarImagenTiff(300, Directory + Cupon2, RutaFormulario + NombreFormulario + "-Cupon2.Tif");
-									GuardarImagenTiff(300, Directory + Cupon3, RutaFormulario + NombreFormulario + "-Cupon3.Tif");
-									
-									GuardarImagenTiff(300, Directory + Cupon4, RutaFormulario + NombreFormulario + "-Cupon4.Tif");
+                                if (EstaBien)
+                                {
 
 
-									// GuardarImagenTiff(300, Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.Tif");
-									try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon1.Tif", Directory2 + NombreFormulario + "-Cupon1.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
-									try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon2.Tif", Directory2 + NombreFormulario + "-Cupon2.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
-									try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon3.Tif", Directory2 + NombreFormulario + "-Cupon3.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
-									try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon4.Tif", Directory2 + NombreFormulario + "-Cupon4.Tif", true);} catch (Exception ex) { Log(ex.ToString()); }
-									
-									try {File.Move(Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.BMP"); 	} catch (Exception ex) { Log(ex.ToString()); }
-									try {File.Move(Directory + Cupon2, Directory2 + NombreFormulario + "-Cupon2.BMP");	} catch (Exception ex) { Log(ex.ToString()); }
-									try {File.Move(Directory + Cupon3, Directory2 + NombreFormulario + "-Cupon3.BMP");  } catch (Exception ex) { Log(ex.ToString()); }
+                                    string Directory = Archivo.Directory.ToString() + "\\";
+                                    string Cupon1 = Archivo.Name.Replace(".TIF", "_Cupon1.BMP");
+                                    string Cupon2 = Archivo.Name.Replace(".TIF", "_Cupon2.BMP");
+                                    string Cupon3 = Archivo.Name.Replace(".TIF", "_Cupon3.BMP");
+                                    string Cupon4 = Archivo.Name.Replace(".TIF", "_Cupon4.BMP");
+                                    #endregion
 
-									try
-									{
-										File.Move(Directory + Cupon4, Directory2 + NombreFormulario + "-Cupon4.BMP");
-									}
-									catch
-									{
-										//File.Move(Directory + Cupon4.Replace("_Cupon", "_Cupo"), Directory2 + NombreFormulario + "-Cupon4.BMP");
-									}
+                                    #region Renombra Archivo
+                                    DirectoryInfo Dir = new DirectoryInfo(Directory + "Cupon\\");
+                                    if (!Dir.Exists) { Dir.Create(); }
 
-									try {File.Move(Directory + HexaFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF");} 
+                                    DirectoryInfo Form = new DirectoryInfo(Directory + "Formulario\\");
+                                    if (!Form.Exists) { Form.Create(); }
+
+                                    string Directory2 = Directory + "Cupon\\";
+                                    GuardarImagenTiff(300, Directory + Cupon1, RutaFormulario + NombreFormulario + "-Cupon1.Tif");
+                                    GuardarImagenTiff(300, Directory + Cupon2, RutaFormulario + NombreFormulario + "-Cupon2.Tif");
+                                    GuardarImagenTiff(300, Directory + Cupon3, RutaFormulario + NombreFormulario + "-Cupon3.Tif");
+
+                                    GuardarImagenTiff(300, Directory + Cupon4, RutaFormulario + NombreFormulario + "-Cupon4.Tif");
+
+
+                                    // GuardarImagenTiff(300, Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.Tif");
+                                    try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon1.Tif", Directory2 + NombreFormulario + "-Cupon1.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
+                                    try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon2.Tif", Directory2 + NombreFormulario + "-Cupon2.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
+                                    try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon3.Tif", Directory2 + NombreFormulario + "-Cupon3.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
+                                    try { File.Copy(RutaFormulario + NombreFormulario + "-Cupon4.Tif", Directory2 + NombreFormulario + "-Cupon4.Tif", true); } catch (Exception ex) { Log(ex.ToString()); }
+
+                                    try { File.Move(Directory + Cupon1, Directory2 + NombreFormulario + "-Cupon1.BMP"); } catch (Exception ex) { Log(ex.ToString()); }
+                                    try { File.Move(Directory + Cupon2, Directory2 + NombreFormulario + "-Cupon2.BMP"); } catch (Exception ex) { Log(ex.ToString()); }
+                                    try { File.Move(Directory + Cupon3, Directory2 + NombreFormulario + "-Cupon3.BMP"); } catch (Exception ex) { Log(ex.ToString()); }
+
+                                    try
+                                    {
+                                        File.Move(Directory + Cupon4, Directory2 + NombreFormulario + "-Cupon4.BMP");
+                                    }
+                                    catch
+                                    {
+                                        //File.Move(Directory + Cupon4.Replace("_Cupon", "_Cupo"), Directory2 + NombreFormulario + "-Cupon4.BMP");
+                                    }
+
+                                    try { File.Move(Directory + HexaFormulario + ".TIF", Directory + "Formulario\\" + NombreFormulario + ".TIF"); }
                                     catch (Exception ex) { Log(ex.ToString()); }
 
-									#endregion
+                                    #endregion
 
-									#region Recorte Huella
+                                    #region Recorte Huella
 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon1.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte1.BMP");
-									//// File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte1.BMP");
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon1.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte1.BMP");
+                                    //// File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte1.BMP");
 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon2.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte2.BMP");
-									//// File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte2.BMP");
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon2.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte2.BMP");
+                                    //// File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte2.BMP");
 
-									//Recorte(Directory2 + NombreFormulario + "-Cupon3.BMP", 500);
-									//BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte3.BMP");
-									////  File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte3.BMP");
+                                    //Recorte(Directory2 + NombreFormulario + "-Cupon3.BMP", 500);
+                                    //BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte3.BMP");
+                                    ////  File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte3.BMP");
 
-									//try
-									//{
-									//	Recorte(Directory2 + NombreFormulario + "-Cupon4.BMP", 500);
-									//	BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte4.BMP");
-									//}
-									//catch
-									//{
-									//	Recorte(Directory2 + NombreFormulario + "-Cupo4.BMP", 500);
-									//	BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte4.BMP");
-									//}
-									//  File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte4.BMP");
-									#endregion
+                                    //try
+                                    //{
+                                    //	Recorte(Directory2 + NombreFormulario + "-Cupon4.BMP", 500);
+                                    //	BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte4.BMP");
+                                    //}
+                                    //catch
+                                    //{
+                                    //	Recorte(Directory2 + NombreFormulario + "-Cupo4.BMP", 500);
+                                    //	BinaryImage(Directory + "Recorte\\" + NombreFormulario + "-Recorte4.BMP");
+                                    //}
+                                    //  File.Delete(Directory + "Recorte\\" + NombreFormulario + "_Recorte4.BMP");
+                                    #endregion
 
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon1.BMP");
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon2.BMP");
-									//File.Delete(Directory2 + NombreFormulario + "_Cupon3.BMP");
-									//try
-									//{
-									//	File.Delete(Directory2 + NombreFormulario + "_Cupon4.BMP");
-									//}
-									//catch
-									//{
-									//	File.Delete(Directory2 + NombreFormulario + "_Cupo4.BMP");
-									//}
-									#region trazabilidad
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon1.Fif", NombreFormulario, NombreFormulario + "_Cupon1");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella1.BMP", NombreFormulario, NombreFormulario + "_Cupon1");
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon1.BMP");
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon2.BMP");
+                                    //File.Delete(Directory2 + NombreFormulario + "_Cupon3.BMP");
+                                    //try
+                                    //{
+                                    //	File.Delete(Directory2 + NombreFormulario + "_Cupon4.BMP");
+                                    //}
+                                    //catch
+                                    //{
+                                    //	File.Delete(Directory2 + NombreFormulario + "_Cupo4.BMP");
+                                    //}
+                                    #region trazabilidad
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon1.Fif", NombreFormulario, NombreFormulario + "_Cupon1");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella1.BMP", NombreFormulario, NombreFormulario + "_Cupon1");
 
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon2.Tif", NombreFormulario, NombreFormulario + "_Cupon2");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella2.BMP", NombreFormulario, NombreFormulario + "_Cupon2");
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon2.Tif", NombreFormulario, NombreFormulario + "_Cupon2");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella2.BMP", NombreFormulario, NombreFormulario + "_Cupon2");
 
-									InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon3.Tif", NombreFormulario, NombreFormulario + "_Cupon3");
-									//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella3.BMP", NombreFormulario, NombreFormulario + "_Cupon3");
+                                    InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon3.Tif", NombreFormulario, NombreFormulario + "_Cupon3");
+                                    //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella3.BMP", NombreFormulario, NombreFormulario + "_Cupon3");
 
-									try
-									{
-										InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon4.Tif", NombreFormulario, NombreFormulario + "_Cupon4");
-										//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella4.BMP", NombreFormulario, NombreFormulario + "_Cupon4");
+                                    try
+                                    {
+                                        InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupon4.Tif", NombreFormulario, NombreFormulario + "_Cupon4");
+                                        //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella4.BMP", NombreFormulario, NombreFormulario + "_Cupon4");
 
-									}
-									catch
-									{
-										InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupo4.Tif", NombreFormulario, NombreFormulario + "_Cupon4");
-										//InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella4.BMP", NombreFormulario, NombreFormulario + "_Cupon4");
+                                    }
+                                    catch
+                                    {
+                                        InsertRecorte("Cupon", Directory + "Cupon\\" + NombreFormulario + "_Cupo4.Tif", NombreFormulario, NombreFormulario + "_Cupon4");
+                                        //InsertRecorte("Huella", Directory + "Recorte\\Huella\\" + NombreFormulario + "_Huella4.BMP", NombreFormulario, NombreFormulario + "_Cupon4");
 
-									}
-									InsertRecorte("Formulario", Directory + "Formulario\\" + NombreFormulario + ".TIF", NombreFormulario, NombreFormulario);
+                                    }
+                                    InsertRecorte("Formulario", Directory + "Formulario\\" + NombreFormulario + ".TIF", NombreFormulario, NombreFormulario);
 
-									#endregion
+                                    #endregion
 
-								}
-								else
-								{
-									int unio = 0;
-								}
-							}
-							else
-							{
-								FileInfo f = new FileInfo(imagen);
-								string Rut = f.DirectoryName.ToString() + "\\NoEncontradas\\";
+                                }
+                                else
+                                {
+                                    int unio = 0;
+                                }
+                            }
+                            else
+                            {
+                                FileInfo f = new FileInfo(imagen);
+                                string Rut = f.DirectoryName.ToString() + "\\NoEncontradas\\";
 
-								DirectoryInfo Dir = new DirectoryInfo(Rut);
-								if (!Dir.Exists)
-								{
-									Dir.Create();
-								}
-								try
-								{
-									File.Move(imagen, Dir + f.Name);
-								}
-								catch (Exception ex)
-								{
+                                DirectoryInfo Dir = new DirectoryInfo(Rut);
+                                if (!Dir.Exists)
+                                {
+                                    Dir.Create();
+                                }
+                                try
+                                {
+                                    File.Move(imagen, Dir + f.Name);
+                                }
+                                catch (Exception ex)
+                                {
                                     Log(ex.ToString());
                                 }
 
 
-							}
-						}
+                            }
+                        }
                     }
                     else
                     {
                         InsertSalida(nombreDoc, imagen, usuario);
                     }
                 }
-                
-				GC.Collect();
+
+                GC.Collect();
                 return (int)ehReturnValue.EV_OK;
             }
             catch (Exception err)
@@ -3938,15 +3991,15 @@ namespace BasicAPI
         {
             try
             {
-                
+
                 byte[] data = File.ReadAllBytes(RutaOrigen);
                 //ImageConverter IC = new ImageConverter();
                 //Image img = IC.ConvertFrom(data) as Image;
 
                 using (MemoryStream ms = new MemoryStream(data))
                 {
-                     using (Bitmap bitmap = (Bitmap)Image.FromStream(ms,true,true))
-                    {               
+                    using (Bitmap bitmap = (Bitmap)Image.FromStream(ms, true, true))
+                    {
                         FileInfo f = new FileInfo(RutaDestino);
                         DirectoryInfo Dir = new DirectoryInfo(f.DirectoryName);
                         if (!Dir.Exists)
@@ -3970,11 +4023,11 @@ namespace BasicAPI
                             EncoderParameters myEncoderParameters = new EncoderParameters(1);
                             myEncoderParameters.Param[0] = myEncoderParameter;
                             newBitmap.SetResolution(dpi, dpi);
-							FileInfo d = new FileInfo(RutaDestino);
-							if (d.Exists)
-							{
-								File.Move(RutaDestino, RutaDestino.ToUpper().ToString().Replace(".TIF","_1.TIF"));
-							}
+                            FileInfo d = new FileInfo(RutaDestino);
+                            if (d.Exists)
+                            {
+                                File.Move(RutaDestino, RutaDestino.ToUpper().ToString().Replace(".TIF", "_1.TIF"));
+                            }
 
 
                             newBitmap.Save(RutaDestino, myImageCodecInfo, myEncoderParameters);
@@ -4066,7 +4119,7 @@ namespace BasicAPI
                 bu.Add("@Formulario", NombreFormulario);
                 bu.Add("@NombreArchivo", NombreArchivo);
                 bu.Add("@opcion", "1");
-                ExecuteSPCon(conexion,"dbo.Traking_Recorte_Sp", bu);
+                ExecuteSPCon(conexion, "dbo.Traking_Recorte_Sp", bu);
             }
             catch (Exception es)
             {
@@ -4089,7 +4142,7 @@ namespace BasicAPI
             int N_YY2 = NewGetDimensiones(5, source.Width, source.Height, matrix);
 
             int Diferencia = (N_YY2 - N_YY);
-            Diferencia = 600 - Math.Abs( Diferencia);
+            Diferencia = 600 - Math.Abs(Diferencia);
 
             Diferencia = Math.Abs(Diferencia);
             if (Diferencia < 600)
@@ -4108,7 +4161,7 @@ namespace BasicAPI
             }
             if (source.Height < (N_YY + 600))
             {
-                N_YY = source.Height-610;
+                N_YY = source.Height - 610;
             }
             string RutaHuella = Ruta;
             RecortarImagen(RutaHuella, RutaHuella, N_XX, N_YY, 600, 600, "Huellas\\NuevasPruebas\\prueba2\\" + Archivo.Name.Replace(".tif", ".bmp"), 500, 2);
@@ -4310,7 +4363,7 @@ namespace BasicAPI
                         {
                             string valor = matrix[x, y].ToString();
                             if (valor == "1")
-                            {                                
+                            {
                                 if (Minx <= x)
                                 {
                                     CountColumna++;
@@ -4609,7 +4662,7 @@ namespace BasicAPI
                         EncoderParameters myEncoderParameters = new EncoderParameters(1);
                         myEncoderParameters.Param[0] = myEncoderParameter;
                         newBitmap.SetResolution(dpi, dpi);
-                       // newBitmap.Save(Dir.ToString() + Archivo.Name.Replace("-Recorte", "_Huella"), myImageCodecInfo, myEncoderParameters);
+                        // newBitmap.Save(Dir.ToString() + Archivo.Name.Replace("-Recorte", "_Huella"), myImageCodecInfo, myEncoderParameters);
 
 
                         //newBitmap.Save(RutaFinal, ImageFormat.Tiff);
@@ -4721,7 +4774,7 @@ namespace BasicAPI
                 bool Resultado = false;
                 long num5;
 
-                
+
                 switch (campo)
                 {
 
@@ -4942,7 +4995,7 @@ namespace BasicAPI
                         {
                             if (Buffer.Length == 1)
                             {
-                                if (int.Parse(Buffer) == 7 || int.Parse(Buffer) == 6)
+                                if (int.Parse(Buffer) >= 0 && int.Parse(Buffer) <= 9)
                                 {
                                     GC.Collect();
                                     return true;
@@ -5055,38 +5108,40 @@ namespace BasicAPI
                         if (ValidarTelefono(Buffer))
                         {
                             string imagen = EHFApp.Form.GetSourceImage();
-							String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
-							Formulario = Formulario.Substring(0,Formulario.Length-11);
-							Dictionary<string, object> parametros = new Dictionary<string, object>();
-							parametros.Add("@Nombre", Formulario);
-							DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Get_TipoInscripcion]", parametros);
+                            String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
+                            Formulario = Formulario.Substring(0, Formulario.Length - 11);
+                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                            parametros.Add("@Nombre", Formulario);
+                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Get_TipoInscripcion]", parametros);
 
-							if (dt.Rows.Count > 0)
-							{
-								string tipoInscripcion = dt.Rows[0][2].ToString();
-								if (tipoInscripcion == "2")
-								{
-									if (Buffer.Length <= 7)
-									{
+                            if (dt.Rows.Count > 0)
+                            {
+                                string tipoInscripcion = dt.Rows[0][2].ToString();
+                                if (tipoInscripcion == "2")
+                                {
+                                    /* if (Buffer.Length <= 7)*/
+                                    if (Buffer.Length <= 20)
+                                    {
                                         GC.Collect();
                                         return true;
-									}
-								}
-								else if (tipoInscripcion == "3")
-								{
-									if (Buffer.Length <= 10)
-									{
+                                    }
+                                }
+                                else if (tipoInscripcion == "3")
+                                {
+                                    /*if (Buffer.Length <= 10)*/
+                                    if (Buffer.Length <= 20)
+                                    {
                                         GC.Collect();
                                         return true;
-									}
-								}
+                                    }
+                                }
 
-							}
+                            }
                         }
-						if (long.TryParse(Buffer, out num5))
-						{
-							
-						}
+                        if (long.TryParse(Buffer, out num5))
+                        {
+
+                        }
                         break;
                     case "TelMovil":
                         if (Buffer == "")
@@ -5097,53 +5152,65 @@ namespace BasicAPI
                         if (ValidarTelefono(Buffer))
                         {
                             string imagen = EHFApp.Form.GetSourceImage();
-							String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
-							Formulario = Formulario.Substring(0, Formulario.Length - 11);
-							Dictionary<string, object> parametros = new Dictionary<string, object>();
-							parametros.Add("@Nombre", Formulario);
-							DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Get_TipoInscripcion]", parametros);
+                            String Formulario = imagen.Split('\\')[imagen.Split('\\').Length - 1];
+                            Formulario = Formulario.Substring(0, Formulario.Length - 11);
+                            Dictionary<string, object> parametros = new Dictionary<string, object>();
+                            parametros.Add("@Nombre", Formulario);
+                            DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Get_TipoInscripcion]", parametros);
 
-							if (dt.Rows.Count > 0)
-							{
-								string tipoInscripcion = dt.Rows[0][2].ToString();
-								if (tipoInscripcion == "2")
-								{
-									if (Buffer.Length <= 10)
-									{
+                            if (dt.Rows.Count > 0)
+                            {
+                                string tipoInscripcion = dt.Rows[0][2].ToString();
+                                if (tipoInscripcion == "2")
+                                {
+                                    /*if (Buffer.Length <= 10)*/
+                                    if (Buffer.Length <= 20)
+                                    {
                                         GC.Collect();
                                         return true;
-									}
-								}
-								else if (tipoInscripcion == "3")
-								{
-									if (Buffer.Length <= 16)
-									{
+                                    }
+                                }
+                                else if (tipoInscripcion == "3")
+                                {
+                                    /* if (Buffer.Length <= 16)*/
+                                    if (Buffer.Length <= 20)
+                                    {
                                         GC.Collect();
                                         return true;
-									}
-								}
+                                    }
+                                }
 
-							}
-						}
+                            }
+                        }
                         break;
                     case "Email":
-                        
-                            if (Buffer == "")
+
+                        if (Buffer == "")
                         {
                             GC.Collect();
                             return true;
                         }
                         else
                         {
-                            String expresion;
-                            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-                            if (Regex.IsMatch(Buffer.ToUpper(), expresion))
+                            /* String expresion;
+                             expresion = @"(@)$";
+                             if (Regex.IsMatch(Buffer.ToUpper(), expresion))
+                             {
+                                 if (Regex.Replace(Buffer.ToUpper(), expresion, String.Empty).Length == 0)
+                                 {
+                                     GC.Collect();
+                                     return true;
+                                 }
+                             }
+                             else
+                             {
+                                 GC.Collect();
+                                 return false;
+                             }*/
+                            if (Buffer.Length <= 150)
                             {
-                                if (Regex.Replace(Buffer.ToUpper(), expresion, String.Empty).Length == 0)
-                                {
-                                    GC.Collect();
-                                    return true;
-                                }
+                                GC.Collect();
+                                return true;
                             }
                             else
                             {
@@ -5209,28 +5276,28 @@ namespace BasicAPI
                             }
                         }
                         break;
-					case "Difhuella":
-						if (Buffer == "")
-						{
+                    case "Difhuella":
+                        if (Buffer == "")
+                        {
                             GC.Collect();
                             return false;
-						}
-						if (!long.TryParse(Buffer, out num5))
-						{
-							if (Buffer.Length == 2)
-							{
-								if (Buffer.ToUpper() == "SI" || Buffer.ToUpper() == "NO")
-								{
+                        }
+                        if (!long.TryParse(Buffer, out num5))
+                        {
+                            if (Buffer.Length == 2)
+                            {
+                                if (Buffer.ToUpper() == "SI" || Buffer.ToUpper() == "NO")
+                                {
                                     GC.Collect();
                                     return true;
-								}
+                                }
 
-							}
-						}
-						break;
+                            }
+                        }
+                        break;
 
 
-				}
+                }
                 GC.Collect();
                 return false;
             }
@@ -5247,7 +5314,7 @@ namespace BasicAPI
             try
             {
                 bool Resultado = false;
-                              
+
                 string[] partNumbers = { buffer };
                 Regex rgx = new Regex(@"^[1-9]$");
                 foreach (string partNumber in partNumbers)
@@ -5258,7 +5325,7 @@ namespace BasicAPI
                     arr = str.ToCharArray(0, partNumber.Length);
                     foreach (char d in arr)
                     {
-                        
+
                         if (char.IsNumber(d))
                         {
                             Resultado = true;
@@ -5345,18 +5412,18 @@ namespace BasicAPI
             try
             {
                 short[] array = new short[]
-			{
-				167,
-				168,
-				122,
-				123,
-				124,
-				125,
-				133,
-				163,
-				136,
-				135
-			};
+    {
+    167,
+    168,
+    122,
+    123,
+    124,
+    125,
+    133,
+    163,
+    136,
+    135
+    };
                 for (int i = 0; i < 10; i++)
                 {
                     ((VerifyApp)this.EHFApp).VeriSetMenuItemEnabled(array[i], false);
@@ -5396,353 +5463,367 @@ namespace BasicAPI
             }
         }
 
-		private void InsertTrazabilidad(int proceso, bool completar = false)
-		{
-			try
-			{
-				#region Variables
-				DataTable ObjTrazabilidad = GetDataTableBasico();
-				string Nombre = EHFApp.Form.GetEHKey();
-				string usuario = EHFApp.GetUserName().Trim();
-				string imagen = EHFApp.Form.GetSourceImage();
+        private void InsertTrazabilidad(int proceso, bool completar = false)
+        {
+            try
+            {
+#region Variables
+                DataTable ObjTrazabilidad = GetDataTableBasico();
+                string Nombre = EHFApp.Form.GetEHKey();
+                string usuario = EHFApp.GetUserName().Trim();
+                string imagen = EHFApp.Form.GetSourceImage();
 
 
-				if (EHFApp is InterpretApp)
-				{
-					if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
+                if (EHFApp is InterpretApp)
+                {
+                    if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
 
 
-					}
-					else
-					{
-						string NombreImagen = imagen.Split('\\')[imagen.Split('\\').Length - 1];
-						String Formulario = NombreImagen.Split('-')[0];
-						string Cupon = NombreImagen.Split('-')[1].Replace("Cupon", "").Replace(".Tif", "");
-						VerificacionInterpretacionCamposRequeridos(Formulario, Cupon);
+                    }
+                    else
+                    {
+                        string NombreImagen = imagen.Split('\\')[imagen.Split('\\').Length - 1];
+                        String Formulario = NombreImagen.Split('-')[0];
+                        string Cupon = NombreImagen.Split('-')[1].Replace("Cupon", "").Replace(".Tif", "");
+                        VerificacionInterpretacionCamposRequeridos(Formulario, Cupon);
 
-						EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
-						EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehValidationError);
-						//EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
-						EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
-						EHFApp.Form.GetFormField("Difhuella", 0).SetStatus(ehFieldStatus.ehValidationError);
-					}
-				}
-				short j = 2;
-				ClassData.Braile = false;
-				ClassData.Invidente = false;
-				ClassData.Nvlestudio = false;
-				ClassData.Genero = false;
-				ClassData.Capacidad = false;
-				string Cedula = "";
-				#endregion
-				string an = "";
+                        EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
+                        EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehValidationError);
+                        //EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
+                        EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
+                        EHFApp.Form.GetFormField("Difhuella", 0).SetStatus(ehFieldStatus.ehValidationError);
+                    }
+                }
+                short j = 2;
+                ClassData.Braile = false;
+                ClassData.Invidente = false;
+                ClassData.Nvlestudio = false;
+                ClassData.Genero = false;
+                ClassData.Capacidad = false;
+                string Cedula = "";
+#endregion
+                string an = "";
 
-				if (EHFApp is InterpretApp)
-				{
-					if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
-						for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-						{
-							string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-							string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-							string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
-							EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
-							EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-						}
+                if (EHFApp is InterpretApp)
+                {
+                    if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
+                        for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                        {
+                            string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                            string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                            string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+                            EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                            EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                        }
 
-						FileInfo Archivo = new FileInfo(imagen);
-						ObjTrazabilidad.Rows.Add("Formulario", Archivo.Name.Replace(Archivo.Extension, ""), "1", usuario);
-					}
-					else
-					{
-						#region Interpretacion
-						for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-						{
-							string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-							string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-							string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+                        FileInfo Archivo = new FileInfo(imagen);
+                        ObjTrazabilidad.Rows.Add("Formulario", Archivo.Name.Replace(Archivo.Extension, ""), "1", usuario);
+                    }
+                    else
+                    {
+#region Interpretacion
+                        for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                        {
+                            string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                            string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                            string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
 
-							#region Data
-							if (campo == "Nvlestudio" || campo == "Invidente" || campo == "Braile" || campo == "Genero" || campo == "Capacidad")
-							{
-								//EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+#region Data
+                            if (campo == "Nvlestudio" || campo == "Invidente" || campo == "Braile" || campo == "Genero" || campo == "Capacidad")
+                            {
+                                //EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
 
-								valor = ValidarCampos(campo, valor, ObjTrazabilidad);
+                                valor = ValidarCampos(campo, valor, ObjTrazabilidad);
 
 
-							}
-							if (campo == "cedula")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
-							}
-							if (campo == "Anulado")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
-							}
+                            }
+                            if (campo == "cedula")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                            }
+                            if (campo == "Anulado")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
+                            }
                             if (campo == "enmenda")
                             {
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                             }
                             if (campo == "Difhuella")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
-							}
-							if (campo.StartsWith("f"))
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
-							}
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
+                            }
+                            if (campo.StartsWith("f"))
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
+                            }
 
 
-							#endregion
-							if (valor != "%")
-							{
-								if (valor.Contains("*"))
-								{
-									valor = "";
-									EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
-									EHFApp.Form.GetFormFieldNo(i).SetValueStr(valor);
-								}
-								ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
-							}
-							else if (valor == "%")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-							}
+#endregion
+                            if (valor != "%")
+                            {
+                                if (valor.Contains("*"))
+                                {
+                                    valor = "";
+                                    EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
+                                    EHFApp.Form.GetFormFieldNo(i).SetValueStr(valor);
+                                }
+                                ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
+                            }
+                            else if (valor == "%")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                            }
 
 
-						}
-						#endregion
-					}
-				}
-				else
-				{
-					#region CATURPA
-					if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
-					{
-						an = EHFApp.Form.GetFormField("Anulado", 0).GetValueStr();
-						if (an == "SI")
-						{
-							ClassData.Braile = false;
-							ClassData.Invidente = false;
-							ClassData.Nvlestudio = false;
-							ClassData.Genero = false;
-							ClassData.Capacidad = false;
+                        }
+#endregion
+                    }
+                }
+                else
+                {
+#region CATURPA
+                    if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
+                    {
+                        an = EHFApp.Form.GetFormField("Anulado", 0).GetValueStr();
+                        if (an == "SI")
+                        {
+                            ClassData.Braile = false;
+                            ClassData.Invidente = false;
+                            ClassData.Nvlestudio = false;
+                            ClassData.Genero = false;
+                            ClassData.Capacidad = false;
+
+                            //EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
+                            //EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
+                            //EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                            //EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
 
 
-							for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-							{
+                            for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                            {
 
-								string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-								string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-								string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+                                string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                                string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                                string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
 
-								valor = "";
-								//EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-								// EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-								if (campo != "Anulado")
-								{
+                                valor = "";
+                                //EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                // EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                if (campo != "Anulado")
+                                {
 
-									if (campo == "Braile" || campo == "Nvlestudio" || campo == "Invidente" || campo == "Genero" || campo == "Capacidad")
-									{
+                                    if (campo == "Braile" || campo == "Nvlestudio" || campo == "Invidente" || campo == "Genero" || campo == "Capacidad")
+                                    {
 
-										EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
-										// EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-										valor = ValidarCampos(campo, valor, ObjTrazabilidad);
-										if (valor != "%")
-										{
-											ObjTrazabilidad.Rows.Add(campo, "", "0", usuario);
-										}
-									}
-									else
-									{
-										// EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-										// EHFApp.Form.SetStatus(ehFormStatus.ehInterpretError);
-										ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
-									}
-								}
-								else
-								{
-									// EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
-									EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehRetype);
-									ObjTrazabilidad.Rows.Add(campo, "SI", "1", usuario);
-								}
+                                        EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                        // EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                        valor = ValidarCampos(campo, valor, ObjTrazabilidad);
+                                        if (valor != "%")
+                                        {
+                                            ObjTrazabilidad.Rows.Add(campo, "", "0", usuario);
+                                        }
+                                        //else
+                                        //{
+                                        //    EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                        //}
+                                    }
+                                    else
+                                    {
+                                        //if (campo =="finsdia")
+                                        //{
+                                        //    EHFApp.Form.GetFormField("finsdia", 0).SetValueStr("");
+                                        //    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehComplete);
+                                        //}
+                                        // EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                        // EHFApp.Form.SetStatus(ehFormStatus.ehInterpretError);
+                                        ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
+                                    }
+                                }
+                                else
+                                {
+                                    // EHFApp.Form.GetFormField("Anulado", 0).SetValueStr(string.Empty);
+                                    EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehRetype);
+                                    ObjTrazabilidad.Rows.Add(campo, "SI", "1", usuario);
+                                }
 
-								//  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr(string.Empty);
 
-							}
+                            }
 
-							ObjTrazabilidad.AcceptChanges();
-							ExcuteTrazabilidad(Nombre, ObjTrazabilidad, 2);
-							EHFApp.Form.SetStatus(ehFormStatus.ehRetype);
-							//EHFApp.Form.SetQueues(2);
-							//(EHFApp as VerifyApp).SkipForm(1);
-						}
-						else
-						{
-							for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-							{
-								string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-								string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-								string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+                            ObjTrazabilidad.AcceptChanges();
+                            ExcuteTrazabilidad(Nombre, ObjTrazabilidad, 2);
+                            EHFApp.Form.SetStatus(ehFormStatus.ehRetype);
+                            //EHFApp.Form.SetQueues(2);
+                            //(EHFApp as VerifyApp).SkipForm(1);
+                        }
+                        else
+                        {
+                            for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                            {
+                                string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                                string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                                string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
 
-								if (campo == "cedula")
-								{
-									//  ValidarDataRefence(valor);
-									Cedula = valor;
-									// EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
-								}
-								else if (campo == "Nvlestudio" || campo == "Genero" || campo == "Capacidad")
-								{
-									EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-									valor = ValidarCampos(campo, valor, ObjTrazabilidad);
-								}
-								else
-								{
-									// EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
-								}
-
-
-								if (valor != "%")
-								{
-									if (EHFApp.Form.GetName().StartsWith("Huella"))
-									{
-										ObjTrazabilidad.Rows.Add(campo, estado, estado, usuario);
-									}
-									else
-									{
-										ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
-									}
-								}
-
-								//Valida Verificacion en Masa
-								if (campo == "Email" || campo == "Dir" || campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2")
-								{
-									if (estado == "0")
-									{
-
-										EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
-									}
-									else
-									{
-										EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-									}
-								}
-								else
-								{
-									if (EHFApp.Form.GetFormFieldNo(i).GetStatus() != ehFieldStatus.ehComplete)
-									{
-										EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
-									}
-								}
-							}
-						}
-
-					}
-					else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
-						for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
-						{
-							string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
-							string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
-							string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
-
-							#region Data
-							if (campo == "Nvlestudio" || campo == "Invidente" || campo == "Braile" || campo == "Genero" || campo == "Capacidad")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-								valor = ValidarCampos(campo, valor, ObjTrazabilidad);
-							}
-							if (campo == "cedula")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
-							}
-							#endregion
-							if (valor != "%")
-							{
-								if (valor.Contains("*"))
-								{
-									valor = "";
-									EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-									EHFApp.Form.GetFormFieldNo(i).SetValueStr(valor);
-								}
-								ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
-							}
-							else if (valor == "%")
-							{
-								EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
-							}
+                                if (campo == "cedula")
+                                {
+                                    //  ValidarDataRefence(valor);
+                                    Cedula = valor;
+                                    // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                }
+                                else if (campo == "Nvlestudio" || campo == "Genero" || campo == "Capacidad")
+                                {
+                                    EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                    valor = ValidarCampos(campo, valor, ObjTrazabilidad);
+                                }
+                                else
+                                {
+                                    // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                }
 
 
-						}
-					}
-					#endregion
-				}
+                                if (valor != "%")
+                                {
+                                    if (EHFApp.Form.GetName().StartsWith("Huella"))
+                                    {
+                                        ObjTrazabilidad.Rows.Add(campo, estado, estado, usuario);
+                                    }
+                                    else
+                                    {
+                                        ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
+                                    }
+                                }
 
-				//   string imagen = EHFApp.Form.GetSourceImage();
+                                //Valida Verificacion en Masa
+                                if (campo == "Email" || campo == "Dir" || campo == "Nom1" || campo == "Nom2" || campo == "Ape1" || campo == "Ape2")
+                                {
+                                    if (estado == "0")
+                                    {
 
-				#region Proceso Normal
-				if (EHFApp is InterpretApp)
-				{
-					if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
-						EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
-						EHFApp.Form.SetQueues(0);
-						//(EHFApp as VerifyApp).SkipForm(1);
-					}
-					else
-					{
-						EHFApp.Form.SetQueues(1);
-					}
-				}
-				else
-				{
-					if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
-					{
-						//Valida Captura Preliminar -  false (proceso normal) - True (Es igual)
+                                        EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
+                                    }
+                                    else
+                                    {
+                                        EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                    }
+                                }
+                                else
+                                {
+                                    if (EHFApp.Form.GetFormFieldNo(i).GetStatus() != ehFieldStatus.ehComplete)
+                                    {
+                                        EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
+                        for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
+                        {
+                            string campo = EHFApp.Form.GetFormFieldNo(i).GetName().Trim();
+                            string valor = EHFApp.Form.GetFormFieldNo(i).GetValueStr().ToUpper().Trim();
+                            string estado = EHFApp.Form.GetFormFieldNo(i).GetStatus() == ehFieldStatus.ehComplete ? "1" : "0";
+
+#region Data
+                            if (campo == "Nvlestudio" || campo == "Invidente" || campo == "Braile" || campo == "Genero" || campo == "Capacidad")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                valor = ValidarCampos(campo, valor, ObjTrazabilidad);
+                            }
+                            if (campo == "cedula")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                            }
+#endregion
+                            if (valor != "%")
+                            {
+                                if (valor.Contains("*"))
+                                {
+                                    valor = "";
+                                    EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                                    EHFApp.Form.GetFormFieldNo(i).SetValueStr(valor);
+                                }
+                                ObjTrazabilidad.Rows.Add(campo, valor, estado, usuario);
+                            }
+                            else if (valor == "%")
+                            {
+                                EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
+                            }
 
 
-						if (ValidarPrimeraCaptura2(ObjTrazabilidad, Cedula))
-						{
-							EHFApp.Form.SetQueues(2);
+                        }
+                    }
+#endregion
+                }
 
-						}
-						else
-						{
-							EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
-							EHFApp.Form.SetQueues(0);
-						}
+                //   string imagen = EHFApp.Form.GetSourceImage();
 
-							(EHFApp as VerifyApp).SkipForm(1);
+#region Proceso Normal
+                if (EHFApp is InterpretApp)
+                {
+                    if (!EHFApp.Job.GetName().ToUpper().Contains("PRIMERA") && !EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
+                        EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
+                        EHFApp.Form.SetQueues(0);
+                        //(EHFApp as VerifyApp).SkipForm(1);
+                    }
+                    else
+                    {
+                        EHFApp.Form.SetQueues(1);
+                    }
+                }
+                else
+                {
+                    if (EHFApp.Job.GetName().ToUpper().Contains("PRIMERA"))
+                    {
+                        //Valida Captura Preliminar -  false (proceso normal) - True (Es igual)
 
-					}
-					else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
-					{
-						EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
-						EHFApp.Form.SetQueues(0);
-					}
-					else
-					{
+
+                        if (ValidarPrimeraCaptura2(ObjTrazabilidad, Cedula))
+                        {
+                            EHFApp.Form.SetQueues(2);
+
+                        }
+                        else
+                        {
+                            EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
+                            EHFApp.Form.SetQueues(0);
+                        }
+
+                    (EHFApp as VerifyApp).SkipForm(1);
+
+                    }
+                    else if (EHFApp.Job.GetName().ToUpper().Contains("SEGUNDA"))
+                    {
+                        EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
+                        EHFApp.Form.SetQueues(0);
+                    }
+                    else
+                    {
 
 
-					}
-				}
+                    }
+                }
 
-				if (completar) EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
-				ObjTrazabilidad.AcceptChanges();
-				ExcuteTrazabilidad(Nombre, ObjTrazabilidad, proceso);
+                if (completar) EHFApp.Form.SetStatus(ehFormStatus.ehComplete);
+                ObjTrazabilidad.AcceptChanges();
+                ExcuteTrazabilidad(Nombre, ObjTrazabilidad, proceso);
 
-                #endregion
+#endregion
                 GC.Collect();
 
             }
-			catch (Exception EX)
-			{
+            catch (Exception EX)
+            {
                 Log(EX.ToString());
                 GC.Collect();
             }
 
-		}
+        }
 
 
         private void VerificacionInterpretacionCamposRequeridos(string Formulario, string Cupon)
@@ -5753,7 +5834,7 @@ namespace BasicAPI
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@Formulario", Formulario);
                 parametros.Add("@Orden", Cupon);
-                DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Interpretacion_Validacion]", parametros);
+                DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Interpretacion_Validacion]", parametros);
                 if (dt.Rows.Count > 0)
                 {
 
@@ -5792,7 +5873,7 @@ namespace BasicAPI
                     string finsdia = FechaInscripcion.Substring(0, 2);
 
 
-                    #region Cedula
+#region Cedula
                     if (Cedula != "%")
                     {
                         EHFApp.Form.GetFormField("cedula", 0).SetValueStr(Cedula);
@@ -5803,8 +5884,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("cedula", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("cedula", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region Primer nombre
+#endregion
+#region Primer nombre
                     if (Prinombre != "%")
                     {
                         EHFApp.Form.GetFormField("Nom1", 0).SetValueStr(Prinombre);
@@ -5815,8 +5896,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region Segundo nombre
+#endregion
+#region Segundo nombre
                     if (Segnombre != "%")
                     {
                         EHFApp.Form.GetFormField("Nom2", 0).SetValueStr(Segnombre);
@@ -5827,8 +5908,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region primer nombre
+#endregion
+#region primer nombre
                     if (Priapellido != "%")
                     {
                         EHFApp.Form.GetFormField("Ape1", 0).SetValueStr(Priapellido);
@@ -5839,8 +5920,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region segundo apellido
+#endregion
+#region segundo apellido
                     if (Segapellido != "%")
                     {
                         EHFApp.Form.GetFormField("Ape2", 0).SetValueStr(Segapellido);
@@ -5851,8 +5932,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region año
+#endregion
+#region año
                     if (ano != "%")
                     {
                         EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr(ano);
@@ -5863,8 +5944,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region mes
+#endregion
+#region mes
                     if (Mes != "%")
                     {
                         EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr(Mes);
@@ -5875,8 +5956,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region Dia
+#endregion
+#region Dia
                     if (Dia != "%")
                     {
                         EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
@@ -5887,43 +5968,43 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
                         EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehInterpretError);
                     }
-                    #endregion
-                    #region Dir
+#endregion
+#region Dir
                     if (Dir != "%")
                     {
                         EHFApp.Form.GetFormField("Dir", 0).SetValueStr(Dir);
                         EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region TelFijo
+#endregion
+#region TelFijo
                     if (TelFijo != "%")
                     {
                         EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr(TelFijo);
                         EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region TelMovil
+#endregion
+#region TelMovil
                     if (TelMovil != "%")
                     {
                         EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr(TelMovil);
                         EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region Braille
+#endregion
+#region Braille
                     if (Braille != "%")
                     {
                         EHFApp.Form.GetFormField("Braile", 0).SetValueStr(Braille);
                         EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region Invidente
+#endregion
+#region Invidente
                     if (Invidente != "%")
                     {
                         EHFApp.Form.GetFormField("Invidente", 0).SetValueStr(Invidente);
                         EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehRetype);
                     }
-                    #endregion
-                    #region Nvlestudio
+#endregion
+#region Nvlestudio
                     if (Nvlestudio != "%")
                     {
                         EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr(Nvlestudio);
@@ -5935,8 +6016,8 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
                         EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
                     }
-                    #endregion
-                    #region Genero
+#endregion
+#region Genero
                     if (Genero != "%")
                     {
                         EHFApp.Form.GetFormField("Genero", 1).SetValueStr(Genero);
@@ -5944,189 +6025,194 @@ namespace BasicAPI
                         EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
                         EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
                     }
-                    #endregion
-                    #region Capacidad
+#endregion
+#region Capacidad
                     if (Capacidad != "%")
                     {
                         EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr(Capacidad);
                         EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehRetype);
+                        EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                        EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
                     }
-                    #endregion
-                    #region finsdia
+#endregion
+#region finsdia
                     if (finsdia != "%")
                     {
                         EHFApp.Form.GetFormField("finsdia", 0).SetValueStr(finsdia);
                         EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region finsmes
+#endregion
+#region finsmes
                     if (finsmes != "%")
                     {
                         EHFApp.Form.GetFormField("finsmes", 0).SetValueStr(finsmes);
                         EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region finsano
+#endregion
+#region finsano
                     if (finsano != "%")
                     {
                         EHFApp.Form.GetFormField("finsano", 0).SetValueStr(finsano);
                         EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
-                    #region Email
+#endregion
+#region Email
                     if (Email != "%")
                     {
                         EHFApp.Form.GetFormField("Email", 0).SetValueStr(Email);
                         EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehValidationError);
                     }
-                    #endregion
+#endregion
 
 
                 }
                 else
                 {
-                    #region Primer nombre
-                        EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehRetype);
-                    #endregion
-                    #region Segundo nombre
-                     
-                        EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
-                    #region primer nombre
-                     
-                        EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
-                    #region segundo apellido
-                   
-                        EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
-                    #region año
-                   
-                        EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
-                    #region mes
-                   
-                    
-                        EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
-                    #region Dia
-                    
-                        EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehInterpretError);
-                    
-                    #endregion
-                    #region Dir
-                   
-                        EHFApp.Form.GetFormField("Dir", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region TelFijo
-                    
-                        EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region TelMovil
-                    
-                        EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region Braille
-                    
-                        EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region Invidente
-                   
-                        EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region Nvlestudio
-                    
-                        EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
-                        EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
-                        EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
-                        EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
-                        EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
-                    
-                    #endregion
-                    #region Genero
-                    
-                        EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
-                        EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
-                        EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
-                        EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
-                    
-                    #endregion
-                    #region Capacidad
-                    
-                        EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
-                        EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
-                    
+#region Primer nombre
+                    EHFApp.Form.GetFormField("Nom1", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nom1", 0).SetStatus(ehFieldStatus.ehRetype);
+#endregion
+#region Segundo nombre
+
+                    EHFApp.Form.GetFormField("Nom2", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nom2", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+#region primer nombre
+
+                    EHFApp.Form.GetFormField("Ape1", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Ape1", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+#region segundo apellido
+
+                    EHFApp.Form.GetFormField("Ape2", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Ape2", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+#region año
+
+                    EHFApp.Form.GetFormField("fexpeano", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("fexpeano", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+#region mes
+
+
+                    EHFApp.Form.GetFormField("fexpemes", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("fexpemes", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+#region Dia
+
+                    EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehInterpretError);
+
+#endregion
+#region Dir
+
+                    EHFApp.Form.GetFormField("Dir", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Dir", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region TelFijo
+
+                    EHFApp.Form.GetFormField("TelFijo", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("TelFijo", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region TelMovil
+
+                    EHFApp.Form.GetFormField("TelMovil", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("TelMovil", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region Braille
+
+                    EHFApp.Form.GetFormField("Braile", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Braile", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region Invidente
+
+                    EHFApp.Form.GetFormField("Invidente", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Invidente", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region Nvlestudio
+
+                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nvlestudio", 1).SetStatus(ehFieldStatus.ehValidationError);
+                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nvlestudio", 2).SetStatus(ehFieldStatus.ehComplete);
+                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nvlestudio", 3).SetStatus(ehFieldStatus.ehComplete);
+                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetValueStr("");
+                    EHFApp.Form.GetFormField("Nvlestudio", 4).SetStatus(ehFieldStatus.ehComplete);
+
+#endregion
+#region Genero
+
+                    EHFApp.Form.GetFormField("Genero", 1).SetValueStr("");
+                    EHFApp.Form.GetFormField("Genero", 1).SetStatus(ehFieldStatus.ehValidationError);
+                    EHFApp.Form.GetFormField("Genero", 2).SetValueStr("");
+                    EHFApp.Form.GetFormField("Genero", 2).SetStatus(ehFieldStatus.ehComplete);
+
+#endregion
+#region Capacidad
+
+                    EHFApp.Form.GetFormField("Capacidad", 1).SetValueStr("");
+                    EHFApp.Form.GetFormField("Capacidad", 1).SetStatus(ehFieldStatus.ehValidationError);
+                    EHFApp.Form.GetFormField("Capacidad", 2).SetValueStr("");
+                    EHFApp.Form.GetFormField("Capacidad", 2).SetStatus(ehFieldStatus.ehComplete);
+
+
                     #endregion
                     #region finsdia
-                    
-                        EHFApp.Form.GetFormField("finsdia", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region finsmes
-                    
-                        EHFApp.Form.GetFormField("finsmes", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region finsano
-                    
-                        EHFApp.Form.GetFormField("finsano", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
-                    
-                    #endregion
-                    #region Email
-                    
-                        EHFApp.Form.GetFormField("Email", 0).SetValueStr("");
-                        EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
-                    
-                    #endregion
 
-                    #region Enmendadura
+                    EHFApp.Form.GetFormField("finsdia", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("finsdia", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region finsmes
+
+                    EHFApp.Form.GetFormField("finsmes", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("finsmes", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region finsano
+
+                    EHFApp.Form.GetFormField("finsano", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("finsano", 0).SetStatus(ehFieldStatus.ehValidationError);
+
+#endregion
+#region Email
+
+                    EHFApp.Form.GetFormField("Email", 0).SetValueStr("");
+                    EHFApp.Form.GetFormField("Email", 0).SetStatus(ehFieldStatus.ehRetype);
+
+#endregion
+
+#region Enmendadura
 
                     EHFApp.Form.GetFormField("enmenda", 0).SetValueStr("");
                     EHFApp.Form.GetFormField("enmenda", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-                    #endregion
+#endregion
 
-                    #region Difhuella
+#region Difhuella
 
                     EHFApp.Form.GetFormField("Difhuella", 0).SetValueStr("");
                     EHFApp.Form.GetFormField("Difhuella", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-                    #endregion
+#endregion
 
-                    #region Huella
+#region Huella
 
                     EHFApp.Form.GetFormField("Huellas", 0).SetValueStr("");
                     EHFApp.Form.GetFormField("Huellas", 0).SetStatus(ehFieldStatus.ehValidationError);
 
-                    #endregion
+#endregion
                 }
                 EHFApp.Form.GetFormField("Anulado", 0).SetValueStr("No");
                 EHFApp.Form.GetFormField("Anulado", 0).SetStatus(ehFieldStatus.ehValidationError);
@@ -6144,7 +6230,7 @@ namespace BasicAPI
             try
             {
 
-                #region validacion
+#region validacion
                 bool respuesta = false;
                 bool _Nvlestudio = false;
                 bool _Genero = false;
@@ -6158,7 +6244,7 @@ namespace BasicAPI
                     for (short i = 1; i <= EHFApp.Form.GetMaxNoOfFormFields(); i++)
                     {
                         EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
-    
+
                     }
                     EHFApp.Form.SetStatus(ehFormStatus.ehRetype);
                     respuesta = true;
@@ -6172,70 +6258,70 @@ namespace BasicAPI
                         {
                             case "cedula":
 
-                               // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
                                 respuesta = true;
                                 break;
 
                             case "Nom1":
 
-                             //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
                                 respuesta = true;
                                 break;
 
                             case "Nom2":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
                                 respuesta = true;
                                 break;
 
                             case "Ape1":
 
-                               // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                // EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
                                 respuesta = true;
                                 break;
 
                             case "Ape2":
 
-                             //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehRetype);
                                 respuesta = true;
                                 break;
 
                             case "fexpeano":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "fexpemes":
 
-                            //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "fexpedia":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "Dir":
 
-                             //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "TelFijo":
 
-                            //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
@@ -6243,35 +6329,35 @@ namespace BasicAPI
 
                             case "TelMovil":
 
-                            //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //    EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "finsdia":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "finsmes":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "finsano":
 
-                             //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //   EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
 
                             case "Email":
 
-                              //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
+                                //  EHFApp.Form.GetFormFieldNo(i).SetValueStr("");
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehValidationError);
                                 respuesta = true;
                                 break;
@@ -6303,7 +6389,7 @@ namespace BasicAPI
                     EHFApp.Form.SetQueues(0);
                     (EHFApp as VerifyApp).SkipForm(1);
                 }
-                #endregion
+#endregion
                 GC.Collect();
                 return respuesta;
             }
@@ -6319,12 +6405,12 @@ namespace BasicAPI
         {
             try
             {
-                #region Variables
+#region Variables
                 bool respuesta = false;
                 string Nombre = EHFApp.Form.GetEHKey();
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@cedula", Cedula);
-                DataTable Precargue = ExecuteSPCon(conexion,"[dbo].[Traking_Precargue_C]", parametros);
+                DataTable Precargue = ExecuteSPCon(conexion, "[dbo].[Traking_Precargue_C]", parametros);
 
                 String cedula = "", Nombre1 = "", Nombre2 = "", Apellido1 = "", Apellido2 = "", Direccion = "", TelefonoFijo = "", TelefonoMovil = "";
                 String correoElectronico = "", Braille = "", invidente = "", FechaInscripcion = "", IdNivelAcademico = "", Genero = "", Discapacidad = "";
@@ -6337,9 +6423,9 @@ namespace BasicAPI
                 string finsdia_ = "";
                 string finsmes_ = "";
                 string finsano_ = "";
-                #endregion
+#endregion
 
-                #region Valores Pre cargue
+#region Valores Pre cargue
                 foreach (DataRow datos in Precargue.Rows)
                 {
                     cedula = datos.ItemArray[1].ToString();
@@ -6359,9 +6445,9 @@ namespace BasicAPI
                     Discapacidad = datos.ItemArray[20].ToString();
                 }
 
-                #endregion
+#endregion
 
-                #region Valores Captura
+#region Valores Captura
                 foreach (DataRow Info in dt.Rows)
                 {
                     switch (Info.ItemArray[0].ToString())
@@ -6428,14 +6514,14 @@ namespace BasicAPI
                             break;
                     }
 
-                   
+
 
                 }
                 C_FechExpe = fexpedia_ + "//" + fexpemes_ + "//" + fexpeano_;
                 C_FechaInscripcion = finsdia_ + "//" + finsmes_ + "//201" + finsano_;
-                #endregion
+#endregion
 
-                #region validacion
+#region validacion
                 bool _Nvlestudio = false;
                 bool _Genero = false;
                 bool _Invidente = false;
@@ -6675,7 +6761,7 @@ namespace BasicAPI
                                 EHFApp.Form.GetFormFieldNo(i).SetStatus(ehFieldStatus.ehComplete);
                             }
                             break;
- 
+
                         case "finsdia":
                             //  C_FechaInscripcion = Info.ItemArray[17].ToString() + "//" + Info.ItemArray[18].ToString() + "//201" + Info.ItemArray[19].ToString();
                             break;
@@ -6702,7 +6788,7 @@ namespace BasicAPI
                             break;
                     }
                 }
-                #endregion
+#endregion
                 GC.Collect();
                 return respuesta;
             }
@@ -6720,7 +6806,7 @@ namespace BasicAPI
             {
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@Cedula", valor);
-                DataTable dt = ExecuteSPCon(conexion,"[dbo].[Traking_Get_DataReference]", parametros);
+                DataTable dt = ExecuteSPCon(conexion, "[dbo].[Traking_Get_DataReference]", parametros);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -6731,7 +6817,7 @@ namespace BasicAPI
                     string Segapellido = dt.Rows[0]["Segapellido"].ToString();
                     string Fexpedicion = dt.Rows[0]["Fexpedicion"].ToString();
 
-                    string ano = Fexpedicion.Substring(6, 4); 
+                    string ano = Fexpedicion.Substring(6, 4);
                     string Mes = Fexpedicion.Substring(3, 2);
                     string Dia = Fexpedicion.Substring(0, 2);
 
@@ -6760,7 +6846,7 @@ namespace BasicAPI
                     EHFApp.Form.GetFormField("fexpedia", 0).SetValueStr(Dia);
                     EHFApp.Form.GetFormField("fexpedia", 0).SetStatus(ehFieldStatus.ehRetype);
 
-                    
+
 
 
                 }
@@ -6907,7 +6993,7 @@ namespace BasicAPI
 
                 int num2 = 1;
                 DataTable ObjBinarizacion = GetBinarizacion();
-                #region Recorre El campo de marcacion
+#region Recorre El campo de marcacion
                 List<String> DatosEncontrados = new List<string>();
                 for (short i = 1; i <= 8; i++)
                 {
@@ -6933,7 +7019,7 @@ namespace BasicAPI
 
 
                 }
-                #endregion
+#endregion
 
 
 
@@ -6998,37 +7084,37 @@ namespace BasicAPI
 
                 foreach (DataRow Dato in ObjBinarizacion.Rows)
                 {
-                    #region variables
+#region variables
                     string V_Campo = Dato.ItemArray[0].ToString();
                     string V_Posicion = Dato.ItemArray[1].ToString();
                     string V_LeftPos = Dato.ItemArray[2].ToString();
                     string V_RightPos = Dato.ItemArray[3].ToString();
                     string V_TopPos = Dato.ItemArray[4].ToString();
                     string V_BottomPos = Dato.ItemArray[5].ToString();
-                    #endregion
-
-                     
-
-                            if (ValorMayor == 0)
-                            {
-                                ValorMayor = int.Parse(V_RightPos) * int.Parse(V_BottomPos);
-                                Posicion = int.Parse(V_Posicion);
-                            }
-                            else
-                            {
-
-                                int ValorMayor_Temp = int.Parse(V_RightPos) * int.Parse(V_BottomPos);
-                                if (ValorMayor_Temp > ValorMayor)
-                                {
-                                    Posicion = int.Parse(V_Posicion);
-                                }
+#endregion
 
 
-                            }
-                    
-                   
-                  
-                   
+
+                    if (ValorMayor == 0)
+                    {
+                        ValorMayor = int.Parse(V_RightPos) * int.Parse(V_BottomPos);
+                        Posicion = int.Parse(V_Posicion);
+                    }
+                    else
+                    {
+
+                        int ValorMayor_Temp = int.Parse(V_RightPos) * int.Parse(V_BottomPos);
+                        if (ValorMayor_Temp > ValorMayor)
+                        {
+                            Posicion = int.Parse(V_Posicion);
+                        }
+
+
+                    }
+
+
+
+
                 }
                 GC.Collect();
                 return Posicion.ToString();
@@ -7080,12 +7166,13 @@ namespace BasicAPI
                         {
                             EHFApp.Form.GetFormField(campo, i).SetValueStr("");
                             EHFApp.Form.GetFormField(campo, i).SetStatus(ehFieldStatus.ehInterpretError);
-                        }else
+                        }
+                        else
                         {
                             EHFApp.Form.GetFormField(campo, i).SetValueStr("");
                             EHFApp.Form.GetFormField(campo, i).SetStatus(ehFieldStatus.ehComplete);
                         }
-                       
+
                     }
                 }
                 GC.Collect();
@@ -7105,9 +7192,9 @@ namespace BasicAPI
             {
 
                 int num2 = 1;
-                 String Valor  ="1";
+                String Valor = "1";
                 String vlr_Escogido = "";
-                #region Recorre El campo de marcacion
+#region Recorre El campo de marcacion
                 List<String> DatosEncontrados = new List<string>();
                 for (short i = 1; i <= int.Parse(Longitud); i++)
                 {
@@ -7124,10 +7211,10 @@ namespace BasicAPI
                         num2++;
                     }
                 }
-                #endregion
+#endregion
                 ClassData.DatosEncontradosP = DatosEncontrados;
 
-                #region Limpia campos
+#region Limpia campos
                 for (short j = 1; j <= int.Parse(Longitud); j += 1)
                 {
                     if (EHFApp.Form.FormFieldNameExist(campo, j) == 1)
@@ -7136,9 +7223,9 @@ namespace BasicAPI
                         this.EHFApp.Form.GetFormField(campo, j).SetValueStr(string.Empty);
                     }
                 }
-                #endregion
+#endregion
 
-                #region  pregunta si tiene 1 opcion escogida
+#region  pregunta si tiene 1 opcion escogida
                 if (DatosEncontrados.Count == 1)
                 {
 
@@ -7155,7 +7242,7 @@ namespace BasicAPI
                 }
 
                 ClassData.VlrCaptura = Valor;
-                #endregion
+#endregion
                 GC.Collect();
                 return vlr_Escogido;
             }
@@ -7164,8 +7251,8 @@ namespace BasicAPI
                 Log(ex.ToString());
                 GC.Collect();
                 return "";
-               
-                
+
+
             }
 
         }
@@ -7204,7 +7291,7 @@ namespace BasicAPI
                 {
                     Dictionary<string, object> parametros = new Dictionary<string, object>();
                     parametros.Add("Name", campo);
-                    DataTable dt = ExecuteSPCon(conexion,"[dbo].[GetValidation]", parametros);
+                    DataTable dt = ExecuteSPCon(conexion, "[dbo].[GetValidation]", parametros);
 
                     if (dt.Rows.Count > 0)
                     {
@@ -7214,14 +7301,14 @@ namespace BasicAPI
                             string[] Prohibitedvalues = Dato.ItemArray[3].ToString().Split(';');
                             foreach (string Prohibidos in Prohibitedvalues)
                             {
-                                #region Valida Valores Prohibidos
+#region Valida Valores Prohibidos
                                 if (Prohibidos == valor)
                                 {
                                     return false;
                                 }
-                                #endregion
+#endregion
 
-                                #region Valida Logitud
+#region Valida Logitud
                                 int Longitud = int.Parse(Dato.ItemArray[4].ToString());
                                 if (!campo.ToUpper().Contains("COD"))
                                 {
@@ -7236,7 +7323,7 @@ namespace BasicAPI
                                     GC.Collect();
                                     return true;
                                 }
-                                #endregion
+#endregion
 
                             }
                         }
@@ -7288,19 +7375,19 @@ namespace BasicAPI
         {
             try
             {
-                #region Variables
+#region Variables
                 List<string> Lista = new List<string>();
                 List<string> ListaFecha = new List<string>();
-               
-                #endregion
 
-                #region Valor indexacion
+#endregion
 
-                Lista.Add(valor);  
-             
-                #endregion
+#region Valor indexacion
 
-                #region Valor para  Marca Fecha
+                Lista.Add(valor);
+
+#endregion
+
+#region Valor para  Marca Fecha
                 for (short num = 1; num <= 8; num++)
                 {
                     string text = this.EHFApp.Form.GetFormField(campo, num).GetValueStr().ToUpper();
@@ -7309,10 +7396,10 @@ namespace BasicAPI
                         ListaFecha.Add(text);
                     }
                 }
-                #endregion
+#endregion
 
-             
-                #region Validar Informacion Marcha Fecha
+
+#region Validar Informacion Marcha Fecha
                 if (campo == "Marca_fecha")
                 {
                     if (!ListaFecha.Contains(Lista[0].ToString()))
@@ -7341,11 +7428,11 @@ namespace BasicAPI
                         return 2;
                     }
                 }
-                #endregion 
+#endregion
 
-      
+
                 GC.Collect();
-                return 1; 
+                return 1;
             }
             catch
             {
@@ -7367,7 +7454,7 @@ namespace BasicAPI
                 {
                     if (EHFApp.Form.FormFieldNameExist(campo, i) == 1)
                     {
-                       
+
                         string text = this.EHFApp.Form.GetFormField(campo, i).GetValueStr().ToUpper();
                         if (text != "")
                         {
@@ -7378,7 +7465,7 @@ namespace BasicAPI
                         num2++;
                     }
                 }
-                #region Proceso 1
+#region Proceso 1
                 if (proceso == 1)
                 {
                     if (num != 1)
@@ -7396,7 +7483,7 @@ namespace BasicAPI
                         }
                     }
                 }
-                #endregion
+#endregion
 
                 if (campo == "MarcaMotivo")
                 {
@@ -7454,7 +7541,7 @@ namespace BasicAPI
                 Log(var_3_FE.ToString());
                 result = null;
                 GC.Collect();
-                
+
             }
             GC.Collect();
             return result;
@@ -7491,7 +7578,7 @@ namespace BasicAPI
                 GC.Collect();
                 GC.Collect();
                 return 2;
-                
+
             }
         }
 
@@ -7580,7 +7667,7 @@ namespace BasicAPI
                 }
                 else if (long.TryParse(text.Replace("*", ""), out numerico))
                 {
-                    if (int.Parse(text) > 31 )
+                    if (int.Parse(text) > 31)
                     {
                         text = "1";
                     }
@@ -7602,7 +7689,7 @@ namespace BasicAPI
                         }
                     }
                 }
-                
+
                 string valueStr = "";
                 for (short num6 = 1; num6 <= 8; num6 += 1)
                 {
@@ -7636,7 +7723,7 @@ namespace BasicAPI
             dt.Columns.Add("Campo", typeof(string));
             dt.Columns.Add("Valor", typeof(string));
             dt.Columns.Add("Aprobado", typeof(int));
-          //  dt.Columns.Add("VlrCapturado", typeof(string));
+            //  dt.Columns.Add("VlrCapturado", typeof(string));
             dt.Columns.Add("Usuario", typeof(string));
             GC.Collect();
             return dt;
@@ -7651,7 +7738,7 @@ namespace BasicAPI
             parametros.Add("docDef", docDef);
             parametros.Add("imagen", imagen);
             parametros.Add("usuario", usuario);
-            ExecuteSPCon(conexion,"[dbo].[Traking_Ingreso]", parametros);
+            ExecuteSPCon(conexion, "[dbo].[Traking_Ingreso]", parametros);
             GC.Collect();
         }
 
@@ -7667,7 +7754,7 @@ namespace BasicAPI
                 parametros.Add("@opcion", "1");
                 DataTable Ruta = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros);
 
-                RDestino = Ruta.Rows[0][0].ToString() + f.Name.Replace(f.Extension, "")+".JPG";
+                RDestino = Ruta.Rows[0][0].ToString() + f.Name.Replace(f.Extension, "") + ".JPG";
 
                 Bitmap bmp1 = new Bitmap(fileName);
                 ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
@@ -7699,37 +7786,37 @@ namespace BasicAPI
                 string RutaExporImg = ExportImg(imagen);
 
 
-                #region BD
+#region BD
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("nombre", nombre);
                 parametros.Add("imagen", RutaExporImg);
                 parametros.Add("usuario", usuario);
-                DataTable resp = ExecuteSPCon(conexion,"[dbo].[Traking_Salida]", parametros);
-                #endregion
+                DataTable resp = ExecuteSPCon(conexion, "[dbo].[Traking_Salida]", parametros);
+#endregion
 
-                #region Cupon
+#region Cupon
                 Dictionary<string, object> parametros2 = new Dictionary<string, object>();
                 parametros2.Add("@Name", "RutaExport");
                 parametros2.Add("@opcion", "1");
-                DataTable Ruta = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros2);
+                DataTable Ruta = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros2);
                 string RutaCupon = Ruta.Rows[0][0].ToString();
-                #endregion
+#endregion
 
-                #region Formulario
+#region Formulario
                 Dictionary<string, object> parametros3 = new Dictionary<string, object>();
                 parametros3.Add("@Name", "RutaExportFormulario");
                 parametros3.Add("@opcion", "1");
-                DataTable Ruta3 = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros3);
+                DataTable Ruta3 = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros3);
                 string RutaFormulario = Ruta3.Rows[0][0].ToString();
-                #endregion
+#endregion
 
-                #region Huella
+#region Huella
                 Dictionary<string, object> parametros4 = new Dictionary<string, object>();
                 parametros4.Add("@Name", "RutaExportHuella");
                 parametros4.Add("@opcion", "1");
-                DataTable Ruta4 = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros4);
+                DataTable Ruta4 = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros4);
                 string RutaHuella = Ruta4.Rows[0][0].ToString();
-                #endregion
+#endregion
 
                 String Formulario = resp.Rows[0]["NumeroCodBar"].ToString();
                 String cupon = resp.Rows[0]["cupon"].ToString().Replace("Cupon", "");
@@ -7742,7 +7829,7 @@ namespace BasicAPI
 
                 FileInfo Dir = new FileInfo(Ubicacion);
                 RutaHuella = RutaHuella + "\\" + departamento + "\\" + municipio + "\\" + puesto + "\\";
-                RutaCupon  = RutaCupon + departamento + "\\" + municipio + "\\" + puesto + "\\";
+                RutaCupon = RutaCupon + departamento + "\\" + municipio + "\\" + puesto + "\\";
                 RutaFormulario = RutaFormulario + departamento + "\\" + municipio + "\\" + puesto + "\\";
 
                 DirectoryInfo DirHUella = new DirectoryInfo(RutaHuella);
@@ -7751,13 +7838,13 @@ namespace BasicAPI
 
                 if (!DirHUella.Exists)
                     DirHUella.Create();
-                 
-               if (!DirCupon.Exists)
+
+                if (!DirCupon.Exists)
                     DirCupon.Create();
-                
+
                 if (!DirFormulario.Exists)
                     DirFormulario.Create();
-             
+
 
                 string NOmbre = Formulario + "-" + cupon + "-" + cedula + "-" + departamento + municipio + puesto + ".Bmp";
                 string NombreCupon = departamento + municipio + puesto + "-" + Formulario + "-" + cupon + ".JPG";
@@ -7765,9 +7852,9 @@ namespace BasicAPI
                 string NombreFormulario2 = departamento + municipio + puesto + "-" + Formulario + ".JPG";
 
                 //huella
-             //   File.Copy(Ubicacion, RutaHuella + NOmbre, true);
+                //   File.Copy(Ubicacion, RutaHuella + NOmbre, true);
                 //Cupon
-             //   File.Copy(RutaExporImg, RutaCupon + NombreCupon, true);
+                //   File.Copy(RutaExporImg, RutaCupon + NombreCupon, true);
                 GuardarImagen(200, RutaExporImg, RutaCupon + NombreCupon);
                 //formulario
                 RecortarImagen(200, Form, RutaFormulario + NombreFormulario);
@@ -7780,7 +7867,7 @@ namespace BasicAPI
                 GC.Collect();
 
             }
-                catch (Exception e)
+            catch (Exception e)
             {
                 Log(e.ToString());
                 MessageBox.Show(e.Message);
@@ -7815,14 +7902,14 @@ namespace BasicAPI
                 String Discapacidad = resp.Rows[0]["Discapacidad"].ToString();
                 String Fullpath = resp.Rows[0]["Fullpath"].ToString();
                 String Novedades = resp.Rows[0]["Novedades"].ToString();
-                
- 
-	            var httpWebRequest = (HttpWebRequest)WebRequest.Create(sUrlRequest);
+
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(sUrlRequest);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
                 var Documentos = new List<Documento>();
 
-                #region Estructura
+#region Estructura
                 var Estructura = new List<Estructura>();
 
 
@@ -7845,16 +7932,16 @@ namespace BasicAPI
                 Resultado = Resultado + "," + CrearKeyword(1, 40, "Capacidad", Discapacidad, 1);
                 Resultado = Resultado + "," + CrearKeyword(1, 41, "Cupon", cupon, 1);
                 Resultado = Resultado + "," + CrearKeyword(1, 42, "Estado", "CAPTURADO", 1);
-               if (Novedades != "")
+                if (Novedades != "")
                     Resultado = Resultado + "," + CrearKeyword(1, 43, "Novedad", Novedades, 1);
-                
+
                 Resultado = "[" + Resultado + "]";
 
-                #endregion
+#endregion
 
-                #region body
-                String Doc = CrearDocumento(27, 1, 1, Resultado, Form.Replace("\\","//"));
-                #endregion
+#region body
+                String Doc = CrearDocumento(27, 1, 1, Resultado, Form.Replace("\\", "//"));
+#endregion
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -7932,8 +8019,8 @@ namespace BasicAPI
 
                 using (Bitmap newBitmap = new Bitmap(RutaInicial))
                 {
-                    
-                   // ----------------------------------------------------
+
+                    // ----------------------------------------------------
 
                     System.Drawing.Imaging.Encoder myEncoder; EncoderParameter myEncoderParameter; EncoderParameters myEncoderParameters;
                     myEncoder = System.Drawing.Imaging.Encoder.Compression;
@@ -7941,7 +8028,7 @@ namespace BasicAPI
                     ImageCodecInfo myImageCodecInfo;
                     myImageCodecInfo = GetEncoderInfo("image/tiff");
                     Image imageIn = Image.FromFile(RutaInicial);
-                  //  Bitmap bmPhoto = new Bitmap(RutaInicial);
+                    //  Bitmap bmPhoto = new Bitmap(RutaInicial);
                     int newHeight = int.Parse(newBitmap.PhysicalDimension.Height.ToString());
                     int newWidth = int.Parse(newBitmap.PhysicalDimension.Width.ToString());
 
@@ -7963,7 +8050,7 @@ namespace BasicAPI
 
                     newImage.Dispose();
                     imageIn.Dispose();
-                   // bmPhoto.Dispose();
+                    // bmPhoto.Dispose();
                     newBitmap.Dispose();
                 }
                 GC.Collect();
@@ -8032,7 +8119,7 @@ namespace BasicAPI
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@Name", "RutaExport");
                 parametros.Add("@opcion", "1");
-                DataTable Ruta = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros);
+                DataTable Ruta = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros);
 
                 string RutaExport = Ruta.Rows[0][0].ToString();
                 if (!RutaExport.EndsWith("\\"))
@@ -8103,14 +8190,14 @@ namespace BasicAPI
                 Dictionary<string, object> parametros = new Dictionary<string, object>();
                 parametros.Add("@Name", "RutaExport");
                 parametros.Add("@opcion", "1");
-                DataTable Ruta = ExecuteSPCon(conexion,"[dbo].[Get_Traking_Set]", parametros);
+                DataTable Ruta = ExecuteSPCon(conexion, "[dbo].[Get_Traking_Set]", parametros);
 
                 string RutaExport = Ruta.Rows[0][0].ToString();
                 if (!RutaExport.EndsWith("\\"))
                 {
                     RutaExport = RutaExport + "\\";
                 }
-                string Nombre = RutaExport + resp.Rows[0]["NumeroCodBar"] + "_" + resp.Rows[0]["cupon"] +"_"+ DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt"; ;
+                string Nombre = RutaExport + resp.Rows[0]["NumeroCodBar"] + "_" + resp.Rows[0]["cupon"] + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt"; ;
                 string Linea = "";
 
                 foreach (DataRow Dato in resp.Rows)
@@ -8145,7 +8232,7 @@ namespace BasicAPI
                 if (File.Exists(Nombre))
                 {
                     StreamWriter objWr = File.AppendText(Nombre);
-                     
+
                     objWr.WriteLine(Linea);
                     objWr.Flush();
                     objWr.Close();
@@ -8153,7 +8240,7 @@ namespace BasicAPI
                 else
                 {
                     StreamWriter objWr = File.CreateText(Nombre);
-                     
+
                     objWr.WriteLine(Linea);
                     objWr.Flush();
                     objWr.Close();
@@ -8174,7 +8261,7 @@ namespace BasicAPI
                 parametros = new Dictionary<string, object>();
                 GC.Collect();
                 return "http://172.27.244.32:8080/WSConsolidaMesa/WSCargarMesa?WSDL";
-                
+
             }
             catch
             {
@@ -8189,20 +8276,20 @@ namespace BasicAPI
             parametros.Add("proceso", proceso);
             parametros.Add("nombre", nombre);
             parametros.Add("tabla", tbl);
-            ExecuteSPCon(conexion,"[dbo].[Traking_Trazabilidad]", parametros);
+            ExecuteSPCon(conexion, "[dbo].[Traking_Trazabilidad]", parametros);
             GC.Collect();
         }
 
-        
 
-        #endregion
 
-        #region Metodos Basicos
+#endregion
+
+#region Metodos Basicos
         private DataTable ExecuteSP(string storeProcedure, Dictionary<string, object> parametro, bool isParametro = false)
         {
             SqlConnection conexion;
 
-            if(!isParametro)
+            if (!isParametro)
                 conexion = GetConexion();
             else
                 conexion = GetConexionParamerto();
@@ -8222,9 +8309,9 @@ namespace BasicAPI
             return dt;
         }
 
-        private DataTable ExecuteSPCon(SqlConnection conexion,string storeProcedure, Dictionary<string, object> parametro, bool isParametro = false)
+        private DataTable ExecuteSPCon(SqlConnection conexion, string storeProcedure, Dictionary<string, object> parametro, bool isParametro = false)
         {
-            
+
             SqlCommand comando = new SqlCommand(storeProcedure, conexion);
             foreach (KeyValuePair<string, object> aux in parametro)
                 comando.Parameters.Add(new SqlParameter(aux.Key, aux.Value));
@@ -8242,12 +8329,12 @@ namespace BasicAPI
             SqlConnection conexion;
 
             //if (!isParametro)
-                conexion = GetConexion();
+            conexion = GetConexion();
             //else
             //    conexion = GetConexionParamerto();
 
             conexion.Open();
-      
+
             SqlCommand comando = new SqlCommand(query, conexion);
             foreach (KeyValuePair<string, object> aux in parametro)
                 comando.Parameters.Add(new SqlParameter(aux.Key, aux.Value));
@@ -8316,16 +8403,16 @@ namespace BasicAPI
             return returnString.Split('\0')[0];
         }
 
-        public void  Log(string log)
+        public void Log(string log)
         {
             StreamWriter escribir = File.CreateText(@"" + "Z:\\Compartido\\Log\\log_" + DateTime.Now.ToString("yyyyMMddh") + ".txt");
-     
+
             escribir.WriteLine(log);
             escribir.Close();
             GC.Collect();
 
         }
-        #endregion
-        
+#endregion
+
     }
 }
