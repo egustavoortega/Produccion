@@ -19,7 +19,7 @@ namespace Recorte
                 {
                     Bitmap recortado = bmp.Clone(areaParaRecortar,
                     bmp.PixelFormat);
-
+                    bmp.Dispose();
                     return (Image)(recortado);
                 }
             }

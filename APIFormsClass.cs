@@ -2603,12 +2603,19 @@ namespace BasicAPI
                                                     string Fexpedicion = dt2.Rows[0]["Fexpedicion"].ToString();
 
 
-                                                    Fexpedicion = DateTime.Parse(Fexpedicion).ToString("dd/MM/yyyy");
+                                                    string ano ="";
+                                                    string Mes ="";
+                                                    string Dia = "";
 
-                                                    string ano = Fexpedicion.Substring(6, 4);
-                                                    string Mes = Fexpedicion.Substring(3, 2);
-                                                    string Dia = Fexpedicion.Substring(0, 2);
-
+                                                    if (Fexpedicion != "")
+                                                    {
+                                                        Fexpedicion = DateTime.Parse(Fexpedicion).ToString("dd/MM/yyyy");
+                                                        ano = Fexpedicion.Substring(6, 4);
+                                                        Mes = Fexpedicion.Substring(3, 2);
+                                                        Dia = Fexpedicion.Substring(0, 2);
+                                                       
+                                                    }
+                                                    
 
                                                     #region Primer nombre
                                                     if (Prinombre != "%")
@@ -3842,7 +3849,6 @@ namespace BasicAPI
                                     GuardarImagenTiff(300, Directory + Cupon1, RutaFormulario + NombreFormulario + "-Cupon1.Tif");
                                     GuardarImagenTiff(300, Directory + Cupon2, RutaFormulario + NombreFormulario + "-Cupon2.Tif");
                                     GuardarImagenTiff(300, Directory + Cupon3, RutaFormulario + NombreFormulario + "-Cupon3.Tif");
-
                                     GuardarImagenTiff(300, Directory + Cupon4, RutaFormulario + NombreFormulario + "-Cupon4.Tif");
 
 
@@ -3991,12 +3997,18 @@ namespace BasicAPI
         {
             try
             {
+                byte[] fileData = null;
 
-                byte[] data = File.ReadAllBytes(RutaOrigen);
-                //ImageConverter IC = new ImageConverter();
-                //Image img = IC.ConvertFrom(data) as Image;
+                using (FileStream fs = new FileStream(RutaOrigen,FileMode.Open, FileAccess.Read))
+                {
+                    var binaryReader = new BinaryReader(fs);
+                    fileData = binaryReader.ReadBytes((int)fs.Length);
+                    //  byte[] data = File.ReadAllBytes(fs.Length);
 
-                using (MemoryStream ms = new MemoryStream(data))
+                    //ImageConverter IC = new ImageConverter();
+                    //Image img = IC.ConvertFrom(data) as Image;
+
+                    using (MemoryStream ms = new MemoryStream(fileData))
                 {
                     using (Bitmap bitmap = (Bitmap)Image.FromStream(ms, true, true))
                     {
@@ -4031,16 +4043,24 @@ namespace BasicAPI
 
 
                             newBitmap.Save(RutaDestino, myImageCodecInfo, myEncoderParameters);
+
+
                             myEncoderParameter.Dispose();
                             myEncoderParameters.Dispose();
+                     
                             newBitmap.Dispose();
 
                         }
+                        imgRecortada.Dispose();
                         bitmap.Dispose();
+
                     }
 
+                    ms.Dispose();
+                   
                 }
-
+                    fs.Dispose();
+                }
 
             }
             catch (Exception ex)
@@ -4085,6 +4105,7 @@ namespace BasicAPI
                             newBitmap.Dispose();
 
                         }
+                        imgRecortada.Dispose();
                         bitmap.Dispose();
                     }
 
@@ -4092,7 +4113,7 @@ namespace BasicAPI
                 catch (Exception ex3)
                 {
                     Log(ex3.ToString());
-                    MessageBox.Show("Error Interno, El Formulario esta incompleto, Para Continuar Presione ACEPTAR.");
+                    MessageBox.Show("Error Interno, El Formulario esta incompleto, Para Continuar Presione OK.");
                 }
 
             }
@@ -8108,6 +8129,7 @@ namespace BasicAPI
                     return encoders[j];
                 }
             }
+           
             GC.Collect();
             return null;
         }
